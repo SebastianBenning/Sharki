@@ -24,6 +24,7 @@ class Endboss extends MovableObject{
     }
 
     animate(){
+        let bossanimation = 0;
         setInterval(() =>{
             this.loadImages(this.images_walking);
             let i = this.currentImage % this.images_walking.length;

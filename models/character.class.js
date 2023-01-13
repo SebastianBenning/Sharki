@@ -82,13 +82,13 @@ class Character extends MovableObject {
          setInterval(() => {
             this.walking_sound.pause();
 
-            if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp) {
+            if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp && !this.isDead()) {
                 this.y -= this.speed;
                 this.cameraSetYUpDown();
                 // this.walking_sound.play();
             }
 
-            if (this.world.keyboard.DOWN && !this.isCollidingWithBarrierDown) {
+            if (this.world.keyboard.DOWN && !this.isCollidingWithBarrierDown && !this.isDead()) {
                 this.y += this.speed;
                 this.cameraSetYUpDown();
                 // this.walking_sound.play();
@@ -96,14 +96,14 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
        setInterval(() => {
-            if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight) {
+            if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight && !this.isDead()) {
                 this.x += this.speed;
                 this.otherDirection = false;
                 this.cameraSetXRightLeft();
                 // this.walking_sound.play();
             }
 
-            if (this.world.keyboard.LEFT && !this.isCollidingWithBarrierLeft) {
+            if (this.world.keyboard.LEFT && !this.isCollidingWithBarrierLeft && !this.isDead()) {
                 this.x -= this.speed;
                 this.otherDirection = true;
                 this.cameraSetXRightLeft();

@@ -4,7 +4,6 @@ class Character extends MovableObject {
     y = 200;
     x = -1300;
     speed = 5;
-
     isCollidingWithBarrierUp = false;
     isCollidingWithBarrierRight = false;
     isCollidingWithBarrierDown = false;
@@ -16,8 +15,6 @@ class Character extends MovableObject {
         right: 70
     }
     checkAlreadyRunning = false;
-
-
     world;
     walking_sound = new Audio('audio/swim.mp3');
 
@@ -33,18 +30,14 @@ class Character extends MovableObject {
     }
 
     animate() {
-
-
-
+        // look what key i press, if i hit a barrier and if the character is dead
         setInterval(() => {
             this.walking_sound.pause();
-
             if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp && !this.isDead()) {
                 this.y -= this.speed;
                 this.cameraSetYUpDown();
                 // this.walking_sound.play();
             }
-
             if (this.world.keyboard.DOWN && !this.isCollidingWithBarrierDown && !this.isDead()) {
                 this.y += this.speed;
                 this.cameraSetYUpDown();
@@ -52,6 +45,7 @@ class Character extends MovableObject {
             }
         }, 1000 / 60);
 
+        // look what key i press, if i hit a barrier and if the character is dead
         setInterval(() => {
             if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight && !this.isDead()) {
                 this.x += this.speed;
@@ -59,7 +53,6 @@ class Character extends MovableObject {
                 this.cameraSetXRightLeft();
                 // this.walking_sound.play();
             }
-
             if (this.world.keyboard.LEFT && !this.isCollidingWithBarrierLeft && !this.isDead()) {
                 this.x -= this.speed;
                 this.otherDirection = true;
@@ -69,6 +62,7 @@ class Character extends MovableObject {
 
         }, 1000 / 60);
 
+        // look what move the character makes
         let stopintercharacter = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(SHARKIE_IMAGES['dead']);
@@ -87,12 +81,12 @@ class Character extends MovableObject {
             }
         }, 130);
 
+        // see what attack is executed
         setInterval(() => {
             if (this.world.keyboard.D) {
                 this.playAnimation(SHARKIE_IMAGES['bubble_Trap']);
                 this.bubbleTrapAttack();
             }
-
             else if (this.world.keyboard.F) {
                 this.playAnimation(SHARKIE_IMAGES['poison_Bubble_Trap']);
                 this.poisonBubbleTrapAttack();
@@ -100,9 +94,9 @@ class Character extends MovableObject {
         }, 130);
     }
 
+    // makes a poison bubble
     poisonBubbleTrapAttack() {
         if (this.world.poison == 0) {
-
         }
         else {
             this.activateF();
@@ -126,6 +120,7 @@ class Character extends MovableObject {
         }
     }
 
+    // sets values ​​so that a bubble only appears every half second
     activateF() {
         if (!this.checkAlreadyRunning) {
             this.currentImage = 0;
@@ -137,11 +132,11 @@ class Character extends MovableObject {
                 this.world.keyboard.F = false;
                 this.checkAlreadyRunning = false;
                 clearInterval(fPressed);
-                console.log(this.world.keyboard.F);
             }, 500);
         }
     }
 
+    // makes a normal bubble
     bubbleTrapAttack() {
         this.activateD();
         if (!this.checkAlreadyRunning) {
@@ -159,6 +154,7 @@ class Character extends MovableObject {
         }
     }
 
+    // sets values ​​so that a bubble only appears every half second
     activateD() {
         if (!this.checkAlreadyRunning) {
             this.currentImage = 0;
@@ -170,11 +166,10 @@ class Character extends MovableObject {
                 this.world.keyboard.D = false;
                 this.checkAlreadyRunning = false;
                 clearInterval(dPressed);
-                console.log(this.world.keyboard.D);
             }, 500);
         }
     }
-
+    // aligns the camera depending on where the character is swimming
     cameraSetXRightLeft() {
         if (this.world.camera_x == -2100 || this.world.camera_x == 1400) {
             if (this.x > -1300 && this.x < -1200) {
@@ -189,7 +184,7 @@ class Character extends MovableObject {
         }
     }
 
-
+    // aligns the camera depending on where the character is swimming
     cameraSetYUpDown() {
         if (this.world.camera_y == -475 || this.world.camera_y == 0) {
             if (this.y > 100 && this.y < 120) {

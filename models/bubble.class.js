@@ -17,7 +17,8 @@ class Bubble extends MovableObject {
         this.width = 50;
         this.trow();
     }
-
+    
+    // let the bubble float and look in which direction
     trow() {
         if (this.otherDirection) {
             setInterval(() => {

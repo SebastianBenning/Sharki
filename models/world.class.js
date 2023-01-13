@@ -19,7 +19,7 @@ class World {
     bubble = [];
     poisonbubble = [];
     coins = 0;
-    poison = 0;
+    poison = 10;
     worldistriggerd = false;
     inervalworld = false;
     allcoins = false;
@@ -167,9 +167,10 @@ class World {
     checkCollisionsBubble(){
         this.levelenemy.fish.forEach((enemy)=>{
             this.bubble.forEach((bubble)=>{
+                let bubbleindex = this.bubble.indexOf(bubble);
                 if(enemy.isColliding(bubble)&& enemy instanceof Jelly){
                     enemy.hitenemy(bubble.attack);
-                    
+                    this.bubble.splice(bubbleindex, 1);
                 }
 
             });
@@ -180,6 +181,7 @@ class World {
     checkCollisionsPoisonBubble(){
         this.levelenemy.fish.forEach((enemy)=>{
             this.poisonbubble.forEach((poisonbubble)=>{
+                let poisonbubbleindex = this.poisonbubble.indexOf(poisonbubble);
                 if(enemy.isColliding(poisonbubble)&& enemy instanceof Jellysuper || enemy.isColliding(poisonbubble)&& enemy instanceof Endboss){
                     enemy.hitenemy(poisonbubble.attack);
                     this.poisonbubble.splice(poisonbubbleindex, 1);

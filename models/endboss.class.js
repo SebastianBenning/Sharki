@@ -15,7 +15,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let bossanimation = 0;
-        setInterval(() => {
+       let intervalboss= setInterval(() => {
             if (bossanimation < 10) {
                 this.loadImages(ENEMYS['boss_animation']);
                 let i = this.currentImage % ENEMYS['boss_animation'].length;
@@ -23,9 +23,18 @@ class Endboss extends MovableObject {
                 bossanimation++;
             }
             else if (this.isHurt()) {
-                this.loadImages(ENEMYS['boss_swim']);
-                let i = this.currentImage % ENEMYS['boss_swim'].length;
-                this.playAnimation(ENEMYS['boss_swim'], i);
+                this.loadImages(ENEMYS['boss_hurt']);
+                let i = this.currentImage % ENEMYS['boss_hurt'].length;
+                this.playAnimation(ENEMYS['boss_hurt'], i);
+            }
+            else if (this.isDead()) {
+                this.loadImages(ENEMYS['boss_dead']);
+                let i = this.currentImage % ENEMYS['boss_dead'].length;
+                console.log(i)
+                this.playAnimation(ENEMYS['boss_dead'], i);
+                if(i == 4){
+                    clearInterval(intervalboss);
+                }
             }
             else {
                 this.loadImages(ENEMYS['boss_swim']);

@@ -4,18 +4,20 @@ class Endboss extends MovableObject {
     width = 400;
     y = 0;
     hadfirstContact = false;
-    
+
 
     constructor() {
         super()
-        
+
         this.x = 2300;
         this.animate();
     }
 
     animate() {
+        this.moveLeft();
         let bossanimation = 0;
-       let intervalboss= setInterval(() => {
+        let intervalboss = setInterval(() => {
+
             if (bossanimation < 10) {
                 this.loadImages(ENEMYS['boss_animation']);
                 let i = this.currentImage % ENEMYS['boss_animation'].length;
@@ -32,8 +34,9 @@ class Endboss extends MovableObject {
                 let i = this.currentImage % ENEMYS['boss_dead'].length;
                 console.log(i)
                 this.playAnimation(ENEMYS['boss_dead'], i);
-                if(i == 4){
+                if (i == 4) {
                     clearInterval(intervalboss);
+                    
                 }
             }
             else {
@@ -41,13 +44,17 @@ class Endboss extends MovableObject {
                 let i = this.currentImage % ENEMYS['boss_swim'].length;
                 this.playAnimation(ENEMYS['boss_swim'], i);
             }
+            if (this.hadfirstContact ){
+                this.moveLeft();
+            }
 
             if (this.istriggerd && !this.hadfirstContact) {
                 bossanimation = 0;
                 this.hadfirstContact = true;
+                
             }
         }, 130);
     }
 
-    
+
 }

@@ -194,7 +194,6 @@ class World {
 
     checkTriggerBoss(){
         if (this.character.x > 1700 && this.character.y < 400 && !this.worldistriggerd ){
-           console.log('work');
            this.levelenemy.fish[25].istriggerd = true;
            this.worldistriggerd = true;
             

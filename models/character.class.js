@@ -79,7 +79,7 @@ class Character extends MovableObject {
 
 
 
-        setInterval(() => {
+         setInterval(() => {
             this.walking_sound.pause();
 
             if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp) {
@@ -95,7 +95,7 @@ class Character extends MovableObject {
             }
         }, 1000 / 60);
 
-        setInterval(() => {
+       setInterval(() => {
             if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight) {
                 this.x += this.speed;
                 this.otherDirection = false;
@@ -112,12 +112,15 @@ class Character extends MovableObject {
 
         }, 1000 / 60);
 
-        setInterval(() => {
+       let stopintercharacter = setInterval(() => {
 
             if (this.isDead()) {
                 this.loadImages(this.images_dead);
                 let i = this.currentImage % this.images_dead.length;
                 this.playAnimation(this.images_dead, i);
+                if (i == 11){
+                    clearInterval(stopintercharacter);
+                }
             }
 
             else if (this.isHurt()) {

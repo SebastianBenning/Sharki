@@ -10,6 +10,7 @@ class World {
     statusBarPoison = new StatusBar('poison', 0, 100, 200, 60, 0);
     chest = this.collectables.collectables[0].intervalChest;
     poisonflask = new Poison(-1220, 700);
+    triggerbarrier = [new Jellysuper(1300, 100), new Jellysuper(1300, 180),new Jellysuper(1300, 260),new Jellysuper(1300, 340)];
     canvas;
     ctx;
     keyboard;
@@ -19,6 +20,7 @@ class World {
     poisonbubble = [];
     coins = 0;
     poison = 0;
+    worldistriggerd = false;
     inervalworld = false;
     allcoins = false;
     hitpoison = false;
@@ -43,7 +45,7 @@ class World {
             this.checkCollisionsPoison();
             this.checkCollisionsBubble();
             this.checkCollisionsPoisonBubble();
-
+            this.checkTriggerBoss();
         }, 1000 / 60);
 
         setInterval(() => {
@@ -178,15 +180,24 @@ class World {
     checkCollisionsPoisonBubble(){
         this.levelenemy.fish.forEach((enemy)=>{
             this.poisonbubble.forEach((poisonbubble)=>{
-                if(enemy.isColliding(poisonbubble)&& enemy instanceof Jellysuper){
+                if(enemy.isColliding(poisonbubble)&& enemy instanceof Jellysuper || enemy.isColliding(poisonbubble)&& enemy instanceof Endboss){
                     enemy.hitenemy(poisonbubble.attack);
-                    
+                    this.poisonbubble.splice(poisonbubbleindex, 1);
                 }
 
             });
             
         });
     }
+
+    checkTriggerBoss(){
+        if (this.character.x > 1700 && this.character.y < 400 && !this.worldistriggerd ){
+           console.log('work');
+           this.levelenemy.fish[25].istriggerd = true;
+           this.worldistriggerd = true;
+            
+       }
+   }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -206,6 +217,9 @@ class World {
         this.addObjectsToMap(this.levelbarrier.backgroundbarrier);
         this.addObjectsToMap(this.levelenemy.fish);
         this.addObjectsToMap(this.collectables.collectables);
+        if(this.worldistriggerd){
+            this.addObjectsToMap(this.triggerbarrier);
+        }
         if (this.allcoins) {
             this.addToMap(this.poisonflask);
         }

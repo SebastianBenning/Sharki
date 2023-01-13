@@ -27,6 +27,8 @@ const level1Enemy =new levelEnemy([
     new Jellysuper(30, 850),
     new Jellysuper(200, 850),
 
+    new Endboss()
+
 ]
 
 )

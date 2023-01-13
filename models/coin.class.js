@@ -1,13 +1,8 @@
 class Coin extends MovableObject{
-    images_coin=[
-        'img/4. Marcadores/1. Coins/1.png',
-        'img/4. Marcadores/1. Coins/2.png',
-        'img/4. Marcadores/1. Coins/3.png',
-        'img/4. Marcadores/1. Coins/4.png',
-        
-    ];
+  
     constructor(x, y){
-        super().loadImage('img/4. Marcadores/1. Coins/1.png')
+        super().loadImage('img/4. Marcadores/1. Coins/1.png');
+        this.loadImages(STATUS_BAR_IMAGES['images_coin']);
         this.x = x;
         this.y = y;
         this.width= 50;
@@ -16,13 +11,9 @@ class Coin extends MovableObject{
         
     }
 
-    animate(){
-        
-        
-        setInterval(() =>{
-            this.loadImages(this.images_coin);
-            let i = this.currentImage % this.images_coin.length;
-            this.playAnimation(this.images_coin, i);
+    animate(){       
+        setInterval(() =>{     
+            this.playAnimation(STATUS_BAR_IMAGES['images_coin']);
         }, 180);
     }
 }

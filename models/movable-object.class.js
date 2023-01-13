@@ -116,11 +116,9 @@ class MovableObject extends DrawableObject {
                 }
                 if (this.startendx) {
                     this.x -= speed;
-
                 }
                 if (!this.startendx) {
                     this.x += speed;
-
                 }
             }
             if (direction == 'horizontal') {
@@ -128,15 +126,12 @@ class MovableObject extends DrawableObject {
                     if (this.y > start) {
                         this.startendy = true;
                         this.intervaly = true;
-
                     }
-
                 }
                 if (this.intervaly) {
                     if (this.y < end) {
                         this.startendy = false;
                         this.intervaly = false;
-
                     }
                 }
                 if (this.startendy) {
@@ -146,10 +141,6 @@ class MovableObject extends DrawableObject {
                     this.y += speed;
                 }
             }
-
-
-
-
         }, 1000 / 60);
     }
 
@@ -165,14 +156,6 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
-    moveTop() {
-
-    }
-
-    moveBot() {
-
-    }
-
     moveLeft() {
       let stopinter =  setInterval(() => {
             this.x -= 0.01;
@@ -182,8 +165,8 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
-    playAnimation(images, i) {
-
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;

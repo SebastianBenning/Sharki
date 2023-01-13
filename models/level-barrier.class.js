@@ -1,9 +1,7 @@
-class levelbarrier{
+class levelbarrier {
     backgroundbarrier;
 
-    constructor( backgroundbarrier){
-        
-        
-        this. backgroundbarrier = backgroundbarrier;
+    constructor(backgroundbarrier) {
+        this.backgroundbarrier = backgroundbarrier;
     }
 }

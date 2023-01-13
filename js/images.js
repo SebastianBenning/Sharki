@@ -30,6 +30,14 @@ let STATUS_BAR_IMAGES = {
         'img/PNG/Neutral/æhest_open.png',
     ],
 
+    'images_coin':[
+        'img/4. Marcadores/1. Coins/1.png',
+        'img/4. Marcadores/1. Coins/2.png',
+        'img/4. Marcadores/1. Coins/3.png',
+        'img/4. Marcadores/1. Coins/4.png',
+        
+    ],
+
     'poisonatack':[
         'img/4. Marcadores/Posión/Animada/1.png',
         'img/4. Marcadores/Posión/Animada/2.png',
@@ -65,6 +73,58 @@ let SHARKIE_IMAGES = {
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png',
         'img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png',
+    ],
+
+    'stay' : [
+        'img/1.Sharkie/1.IDLE/1.png',
+        'img/1.Sharkie/1.IDLE/2.png',
+        'img/1.Sharkie/1.IDLE/3.png',
+        'img/1.Sharkie/1.IDLE/4.png',
+        'img/1.Sharkie/1.IDLE/5.png',
+        'img/1.Sharkie/1.IDLE/6.png',
+        'img/1.Sharkie/1.IDLE/7.png',
+        'img/1.Sharkie/1.IDLE/8.png',
+        'img/1.Sharkie/1.IDLE/9.png',
+        'img/1.Sharkie/1.IDLE/10.png',
+        'img/1.Sharkie/1.IDLE/11.png',
+        'img/1.Sharkie/1.IDLE/12.png',
+        'img/1.Sharkie/1.IDLE/13.png',
+        'img/1.Sharkie/1.IDLE/14.png',
+        'img/1.Sharkie/1.IDLE/15.png',
+        'img/1.Sharkie/1.IDLE/16.png',
+        'img/1.Sharkie/1.IDLE/17.png',
+        'img/1.Sharkie/1.IDLE/18.png'
+    ],
+
+    'swim' : [
+        'img/1.Sharkie/3.Swim/1.png',
+        'img/1.Sharkie/3.Swim/2.png',
+        'img/1.Sharkie/3.Swim/3.png',
+        'img/1.Sharkie/3.Swim/4.png',
+        'img/1.Sharkie/3.Swim/5.png',
+        'img/1.Sharkie/3.Swim/6.png',
+    ],
+
+    'dead' : [
+        'img/1.Sharkie/6.dead/1.Poisoned/1.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/2.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/3.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/4.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/5.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/6.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/7.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/8.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/9.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/10.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/11.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/12.png',
+    ],
+
+    'hurt' : [
+        'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
     ]
 };
 
@@ -88,6 +148,15 @@ let ENEMYS = {
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 2.png',
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 3.png',
         'img/2.Enemy/2 Jelly fish/Súper dangerous/Green 4.png',
+    ],
+
+    'fish_walking' : [
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png'
+
     ],
 
     'boss_animation':[

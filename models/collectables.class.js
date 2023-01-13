@@ -1,8 +1,6 @@
-class Collectables{
-    
+class Collectables{   
     collectables;
-    constructor(collectables){
-        
+    constructor(collectables){    
         this.collectables = collectables;
     }
 }

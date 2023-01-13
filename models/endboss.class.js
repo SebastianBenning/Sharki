@@ -8,7 +8,10 @@ class Endboss extends MovableObject {
 
     constructor() {
         super()
-
+        this.loadImages(ENEMYS['boss_animation']);
+        this.loadImages(ENEMYS['boss_hurt']);
+        this.loadImages(ENEMYS['boss_dead']);
+        this.loadImages(ENEMYS['boss_swim']);
         this.x = 2300;
         this.animate();
     }
@@ -17,41 +20,29 @@ class Endboss extends MovableObject {
         this.moveLeft();
         let bossanimation = 0;
         let intervalboss = setInterval(() => {
-
             if (bossanimation < 10) {
-                this.loadImages(ENEMYS['boss_animation']);
-                let i = this.currentImage % ENEMYS['boss_animation'].length;
-                this.playAnimation(ENEMYS['boss_animation'], i);
+                this.playAnimation(ENEMYS['boss_animation']);
                 bossanimation++;
             }
             else if (this.isHurt()) {
-                this.loadImages(ENEMYS['boss_hurt']);
-                let i = this.currentImage % ENEMYS['boss_hurt'].length;
-                this.playAnimation(ENEMYS['boss_hurt'], i);
+                this.playAnimation(ENEMYS['boss_hurt']);
             }
             else if (this.isDead()) {
-                this.loadImages(ENEMYS['boss_dead']);
-                let i = this.currentImage % ENEMYS['boss_dead'].length;
-                console.log(i)
-                this.playAnimation(ENEMYS['boss_dead'], i);
+                this.playAnimation(ENEMYS['boss_dead']);
                 if (i == 4) {
                     clearInterval(intervalboss);
-                    
                 }
             }
             else {
-                this.loadImages(ENEMYS['boss_swim']);
-                let i = this.currentImage % ENEMYS['boss_swim'].length;
-                this.playAnimation(ENEMYS['boss_swim'], i);
+                this.playAnimation(ENEMYS['boss_swim']);
             }
-            if (this.hadfirstContact ){
+            if (this.hadfirstContact) {
                 this.moveLeft();
             }
 
             if (this.istriggerd && !this.hadfirstContact) {
                 bossanimation = 0;
                 this.hadfirstContact = true;
-                
             }
         }, 130);
     }

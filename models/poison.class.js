@@ -1,4 +1,4 @@
-class Poison extends MovableObject{
+class Poison extends MovableObject {
     offset = {
         top: 48,
         bottom: 48,
@@ -6,9 +6,9 @@ class Poison extends MovableObject{
         right: 48
     }
 
-
-    constructor(x, y){
+    constructor(x, y) {
         super();
+        this.loadImages(STATUS_BAR_IMAGES['poisonatack']);
         this.x = x;
         this.y = y;
         this.height = 100;
@@ -16,15 +16,10 @@ class Poison extends MovableObject{
         this.animate()
     }
 
-    animate(){
-        
-        
-         setInterval(() =>{
-            
-            this.loadImages(STATUS_BAR_IMAGES['poisonatack']);
-            let i = this.currentImage % STATUS_BAR_IMAGES['poisonatack'].length;
-            this.playAnimation(STATUS_BAR_IMAGES['poisonatack'], i);
-            
-        }, 180);  
+    animate() {
+        setInterval(() => {
+            this.playAnimation(STATUS_BAR_IMAGES['poisonatack']);
+
+        }, 180);
     }
 }

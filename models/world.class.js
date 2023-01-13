@@ -10,7 +10,7 @@ class World {
     statusBarPoison = new StatusBar('poison', 0, 100, 200, 60, 0);
     chest = this.collectables.collectables[0].intervalChest;
     poisonflask = new Poison(-1220, 700);
-    triggerbarrier = [new Jellysuper(1300, 100), new Jellysuper(1300, 180),new Jellysuper(1300, 260),new Jellysuper(1300, 340)];
+    triggerbarrier = [new Jellysuper(1300, 100), new Jellysuper(1300, 180), new Jellysuper(1300, 260), new Jellysuper(1300, 340)];
     canvas;
     ctx;
     keyboard;
@@ -49,7 +49,6 @@ class World {
         }, 1000 / 60);
 
         setInterval(() => {
-
             this.levelbarrier.backgroundbarrier.forEach((ground) => {
                 let collindingWithBarrier = this.levelbarrier.backgroundbarrier.find(ground => this.character.isColliding(ground));
                 let collidingWithBarrierX = this.levelbarrier.backgroundbarrier.find(ground => this.character.isCollidingX(ground));
@@ -75,7 +74,6 @@ class World {
     }
 
     checkCollisionsPoison() {
-
         if (this.character.isColliding(this.poisonflask)) {
             if (!this.hitpoison) {
                 this.hitpoison = true;
@@ -129,7 +127,6 @@ class World {
                                     this.collectables.collectables[0].animate();
                                     this.inervalworld = false;
                                     this.chest = this.collectables.collectables[0].intervalChest;
-
                                 }, 2000);
                             }
                         }
@@ -147,9 +144,8 @@ class World {
     checkCollisionsEnemy() {
         this.levelenemy.fish.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                
                 if (!this.hitenemy) {
-                    if(enemy.hitsuper){
+                    if (enemy.hitsuper) {
                         this.character.hitSuper();
                     }
                     this.hitenemy = true;
@@ -164,41 +160,40 @@ class World {
         });
     }
 
-    checkCollisionsBubble(){
-        this.levelenemy.fish.forEach((enemy)=>{
-            this.bubble.forEach((bubble)=>{
+    checkCollisionsBubble() {
+        this.levelenemy.fish.forEach((enemy) => {
+            this.bubble.forEach((bubble) => {
                 let bubbleindex = this.bubble.indexOf(bubble);
-                if(enemy.isColliding(bubble)&& enemy instanceof Jelly){
+                if (enemy.isColliding(bubble) && enemy instanceof Jelly) {
                     enemy.hitenemy(bubble.attack);
                     this.bubble.splice(bubbleindex, 1);
                 }
 
             });
-            
+
         });
     }
 
-    checkCollisionsPoisonBubble(){
-        this.levelenemy.fish.forEach((enemy)=>{
-            this.poisonbubble.forEach((poisonbubble)=>{
+    checkCollisionsPoisonBubble() {
+        this.levelenemy.fish.forEach((enemy) => {
+            this.poisonbubble.forEach((poisonbubble) => {
                 let poisonbubbleindex = this.poisonbubble.indexOf(poisonbubble);
-                if(enemy.isColliding(poisonbubble)&& enemy instanceof Jellysuper || enemy.isColliding(poisonbubble)&& enemy instanceof Endboss){
+                if (enemy.isColliding(poisonbubble) && enemy instanceof Jellysuper || enemy.isColliding(poisonbubble) && enemy instanceof Endboss) {
                     enemy.hitenemy(poisonbubble.attack);
                     this.poisonbubble.splice(poisonbubbleindex, 1);
                 }
 
             });
-            
+
         });
     }
 
-    checkTriggerBoss(){
-        if (this.character.x > 1700 && this.character.y < 400 && !this.worldistriggerd ){
-           this.levelenemy.fish[25].istriggerd = true;
-           this.worldistriggerd = true;
-            
-       }
-   }
+    checkTriggerBoss() {
+        if (this.character.x > 1700 && this.character.y < 400 && !this.worldistriggerd) {
+            this.levelenemy.fish[25].istriggerd = true;
+            this.worldistriggerd = true;
+        }
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -211,14 +206,13 @@ class World {
         this.addToMap(this.statusBarLife);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarPoison);
-
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(0, this.camera_y);
 
         this.addObjectsToMap(this.levelbarrier.backgroundbarrier);
         this.addObjectsToMap(this.levelenemy.fish);
         this.addObjectsToMap(this.collectables.collectables);
-        if(this.worldistriggerd){
+        if (this.worldistriggerd) {
             this.addObjectsToMap(this.triggerbarrier);
         }
         if (this.allcoins) {
@@ -234,27 +228,21 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         this.ctx.translate(-0, -this.camera_y);
 
-
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
     }
 
-
-
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
-
         });
     }
 
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
-
         }
         if (!(mo.img == undefined)) {
             mo.draw(this.ctx);

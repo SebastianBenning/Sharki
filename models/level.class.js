@@ -1,10 +1,6 @@
-class Level{
-    
+class Level {
     backgroundObjects;
-
-    constructor( backgroundObjects){
-        
-        
-        this. backgroundObjects = backgroundObjects;
+    constructor(backgroundObjects) {
+        this.backgroundObjects = backgroundObjects;
     }
 }

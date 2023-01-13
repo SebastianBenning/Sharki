@@ -1,9 +1,6 @@
-class levelEnemy{
+class levelEnemy {
     fish;
-    
-    constructor(fish ){
-        
+    constructor(fish) {
         this.fish = fish;
-        
     }
 }

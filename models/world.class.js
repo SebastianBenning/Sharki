@@ -19,7 +19,7 @@ class World {
     bubble = [];
     poisonbubble = [];
     coins = 0;
-    poison = 10;
+    poison = 0;
     worldistriggerd = false;
     inervalworld = false;
     allcoins = false;
@@ -117,7 +117,6 @@ class World {
                                 setTimeout(() => {
                                     this.allcoins = true;
                                 }, 1000);
-
                             }
                         }
                     }

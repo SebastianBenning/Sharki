@@ -9,7 +9,6 @@ class Jelly extends MovableObject {
     }
 
     constructor(x, y, start, end, direction, speed) {
-
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
         this.loadImages(BUBBLE['jelly_BubbleTrap_Lila']);
         this.loadImages(ENEMYS['jelly_Normal_Lila']);

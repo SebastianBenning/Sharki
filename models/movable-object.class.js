@@ -14,14 +14,6 @@ class MovableObject extends DrawableObject {
         right: 0
     }
 
-
-    isCollidingX(movableObject) {
-        if (this.y + this.height - this.offset.bottom - 5 > movableObject.y + movableObject.offset.top && this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom - 5) {
-            return this.x + this.width - this.offset.right > movableObject.x + movableObject.offset.left &&
-                this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right;
-        }
-    }
-
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -29,17 +21,35 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
+
+
+    isCollidingX(movableObject) {
+        if (this.checkCollindingx(movableObject)) {
+            return this.x + this.width - this.offset.right > movableObject.x + movableObject.offset.left &&
+                this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right;
+        }
+    }
+
+    checkCollindingx(movableObject){
+        return this.y + this.height - this.offset.bottom - 5 > movableObject.y + movableObject.offset.top && 
+        this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom - 5;
+    }
+
+
+
     isCollidingY(movableObject) {
-        if (this.x + this.width - this.offset.right - 10 > movableObject.x + movableObject.offset.left && this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right - 10) {
+        if (this.checkCollindingy(movableObject)) {
             return this.y + this.height - this.offset.bottom > movableObject.y + movableObject.offset.top &&
                 this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom;
         }
     }
 
+    checkCollindingy(movableObject){
+       return this.x + this.width - this.offset.right - 10 > movableObject.x + movableObject.offset.left && 
+        this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right - 10;
+    }
+
     hitground(collidingWithBarrierY, collidingWithBarrierX) {
-
-
-
         if (this.world.keyboard.RIGHT == true && collidingWithBarrierX && !this.isCollidingWithBarrierLeft) {
             this.isCollidingWithBarrierRight = true;
         }
@@ -91,7 +101,6 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
-
     }
 
     switschMove(start, end, direction, speed) {
@@ -100,48 +109,56 @@ class MovableObject extends DrawableObject {
                 this.goOut();
             }
             if (direction == 'vertical') {
-                if (!this.intervalx) {
-                    if (this.x > start) {
-                        this.startendx = true;
-                        this.intervalx = true;
-                        this.otherDirection = false;
-                    }
-                }
-                if (this.intervalx) {
-                    if (this.x < end) {
-                        this.startendx = false;
-                        this.intervalx = false;
-                        this.otherDirection = true;
-                    }
-                }
-                if (this.startendx) {
-                    this.x -= speed;
-                }
-                if (!this.startendx) {
-                    this.x += speed;
-                }
+                this.moveVertical(start, end, speed);
             }
             if (direction == 'horizontal') {
-                if (!this.intervaly) {
-                    if (this.y > start) {
-                        this.startendy = true;
-                        this.intervaly = true;
-                    }
-                }
-                if (this.intervaly) {
-                    if (this.y < end) {
-                        this.startendy = false;
-                        this.intervaly = false;
-                    }
-                }
-                if (this.startendy) {
-                    this.y -= speed;
-                }
-                if (!this.startendy) {
-                    this.y += speed;
-                }
+                this.moveHorizontal(start, end, speed);
             }
         }, 1000 / 60);
+    }
+
+    moveVertical(start, end, speed){
+        if (!this.intervalx) {
+            if (this.x > start) {
+                this.startendx = true;
+                this.intervalx = true;
+                this.otherDirection = false;
+            }
+        }
+        if (this.intervalx) {
+            if (this.x < end) {
+                this.startendx = false;
+                this.intervalx = false;
+                this.otherDirection = true;
+            }
+        }
+        if (this.startendx) {
+            this.x -= speed;
+        }
+        if (!this.startendx) {
+            this.x += speed;
+        }
+    }
+
+    moveHorizontal(start, end, speed){
+        if (!this.intervaly) {
+            if (this.y > start) {
+                this.startendy = true;
+                this.intervaly = true;
+            }
+        }
+        if (this.intervaly) {
+            if (this.y < end) {
+                this.startendy = false;
+                this.intervaly = false;
+            }
+        }
+        if (this.startendy) {
+            this.y -= speed;
+        }
+        if (!this.startendy) {
+            this.y += speed;
+        }
     }
 
     goOut() {

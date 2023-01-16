@@ -65,6 +65,7 @@ class Character extends MovableObject {
         // look what move the character makes
         let stopintercharacter = setInterval(() => {
             if (this.isDead()) {
+                let i = this.currentImage % SHARKIE_IMAGES['dead'].length;
                 this.playAnimation(SHARKIE_IMAGES['dead']);
                 if (i == 11) {
                     clearInterval(stopintercharacter);

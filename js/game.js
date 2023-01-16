@@ -3,12 +3,17 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
+    
+
+
+
+    
+}
+
+function startGame(){
+    document.getElementById('startgame').classList.add('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
-
-
-    console.log('my character is', world.character)
 }
 
 window.addEventListener("keydown", (e) => {

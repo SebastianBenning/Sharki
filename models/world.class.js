@@ -57,20 +57,23 @@ class World {
                     this.isCollidingWithBarrier = true;
                 }
                 else {
-                    this.isCollidingWithBarrier = false
-                    this.character.isCollidingWithBarrierUp = false;
-                    this.character.isCollidingWithBarrierRight = false;
-                    this.character.isCollidingWithBarrierDown = false;
-                    this.character.isCollidingWithBarrierLeft = false;
+                    this.characterNotHit();
                 }
                 if (this.character.isColliding(ground)) {
                     if (this.isCollidingWithBarrier == true) {
                         this.character.hitground(collidingWithBarrierY, collidingWithBarrierX);
-
                     }
                 }
             });
         }, 1000 / 60)
+    }
+
+    characterNotHit() {
+        this.isCollidingWithBarrier = false
+        this.character.isCollidingWithBarrierUp = false;
+        this.character.isCollidingWithBarrierRight = false;
+        this.character.isCollidingWithBarrierDown = false;
+        this.character.isCollidingWithBarrierLeft = false;
     }
 
     checkCollisionsPoison() {
@@ -79,7 +82,6 @@ class World {
                 this.hitpoison = true;
                 setTimeout(() => {
                     this.statusBarPoison.setPercentage(20, 'poison');
-
                     setTimeout(() => {
                         this.statusBarPoison.setPercentage(40, 'poison');
                         setTimeout(() => {
@@ -108,7 +110,7 @@ class World {
                 if (coinIndex == 0) {
                     if (this.coins == 5) {
                         if (!this.inervalworld) {
-                            if (this.collectables.collectables[0].img.currentSrc == this.collectables.collectables[0].openpic.currentSrc) {
+                            if (this.chestOpenPic()) {
                                 this.inervalworld = true;
                                 clearInterval(this.chest);
                                 this.statusBarCoin.setPercentage(0, 'coin');
@@ -118,27 +120,38 @@ class World {
 
                             }
                         }
-                    } else {
-                        if (!this.inervalworld) {
-                            if (this.collectables.collectables[0].img.currentSrc == this.collectables.collectables[0].closedPic.currentSrc) {
-                                this.inervalworld = true;
-                                clearInterval(this.chest);
-                                setTimeout(() => {
-                                    this.collectables.collectables[0].animate();
-                                    this.inervalworld = false;
-                                    this.chest = this.collectables.collectables[0].intervalChest;
-                                }, 2000);
-                            }
+                    }
+                    else if (!this.inervalworld) {
+                        if (this.chestClosedPic()) {
+                            this.inervalworld = true;
+                            clearInterval(this.chest);
+                            this.startChestAnimation();
                         }
                     }
-                } else {
+                }
+                else {
                     this.coins++;
                     this.statusBarCoin.setPercentage(this.coins * 21, 'coin');
                     this.collectables.collectables.splice(coinIndex, 1);
-                    console.log(coinIndex);
                 }
             }
         })
+    }
+
+    startChestAnimation() {
+        setTimeout(() => {
+            this.collectables.collectables[0].animate();
+            this.inervalworld = false;
+            this.chest = this.collectables.collectables[0].intervalChest;
+        }, 2000);
+    }
+
+    chestOpenPic() {
+        return this.collectables.collectables[0].img.currentSrc == this.collectables.collectables[0].openpic.currentSrc;
+    }
+
+    chestClosedPic() {
+        return this.collectables.collectables[0].img.currentSrc == this.collectables.collectables[0].closedPic.currentSrc;
     }
 
     checkCollisionsEnemy() {
@@ -148,44 +161,51 @@ class World {
                     if (enemy.hitsuper) {
                         this.character.hitSuper();
                     }
-                    this.hitenemy = true;
-                    this.character.hit();
-                    this.statusBarLife.setPercentage(this.character.energy, 'life');
-                    console.log(this.character.energy);
-                    setTimeout(() => {
-                        this.hitenemy = false;
-                    }, 400)
+                    this.characterHit();
                 }
             }
         });
+    }
+
+    characterHit() {
+        this.hitenemy = true;
+        this.character.hit();
+        this.statusBarLife.setPercentage(this.character.energy, 'life');
+        setTimeout(() => {
+            this.hitenemy = false;
+        }, 400)
     }
 
     checkCollisionsBubble() {
         this.levelenemy.fish.forEach((enemy) => {
             this.bubble.forEach((bubble) => {
                 let bubbleindex = this.bubble.indexOf(bubble);
-                if (enemy.isColliding(bubble) && enemy instanceof Jelly) {
+                if (this.hitEnemyNormalBubble(enemy, bubble)) {
                     enemy.hitenemy(bubble.attack);
                     this.bubble.splice(bubbleindex, 1);
                 }
-
             });
-
         });
+    }
+
+    hitEnemyNormalBubble(enemy, bubble) {
+        return enemy.isColliding(bubble) && enemy instanceof Jelly;
     }
 
     checkCollisionsPoisonBubble() {
         this.levelenemy.fish.forEach((enemy) => {
             this.poisonbubble.forEach((poisonbubble) => {
                 let poisonbubbleindex = this.poisonbubble.indexOf(poisonbubble);
-                if (enemy.isColliding(poisonbubble) && enemy instanceof Jellysuper || enemy.isColliding(poisonbubble) && enemy instanceof Endboss) {
+                if (this.hitEnemyPoisonBubble(enemy, poisonbubble)) {
                     enemy.hitenemy(poisonbubble.attack);
                     this.poisonbubble.splice(poisonbubbleindex, 1);
                 }
-
             });
-
         });
+    }
+
+    hitEnemyPoisonBubble(enemy, poisonbubble) {
+        return enemy.isColliding(poisonbubble) && enemy instanceof Jellysuper || enemy.isColliding(poisonbubble) && enemy instanceof Endboss;
     }
 
     checkTriggerBoss() {

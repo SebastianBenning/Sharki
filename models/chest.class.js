@@ -14,6 +14,7 @@ class Chest extends MovableObject {
         this.closePic();
         this.openPic();
     }
+    
     // animates the chest
     animate() {
         this.intervalChest = [];

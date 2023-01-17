@@ -17,28 +17,143 @@ body{
 }
 
 .d-none{
-    display: none;
+    display: none !important;
 }
 
 h1{
-    font-size: 64px;
+    font-size: 100px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     color: white;
+    margin: 10px;
+}
+
+h2{
+    font-size: 50px;
+    text-decoration: underline;
 }
 
 canvas{
     display: block;
-    
+    border-radius: 8px;
 }
+
+.button-container{
+    display: flex;
+    justify-content: space-around;
+    width: 720px;
+    margin-top: 10px;
+}
+
+.nav{
+    width: 58px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+.nav-icon{
+    width: 100%;
+}
+
+.help-img-jelly{
+    width: 60px;
+}
+
+.header{
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
 
 .start-game{
     width: 250px;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.start-game:hover{
+    width: 280px;
+}
+
+.help-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.help-img{
+    width: 100px;
+}
+
+.help-img-key{
+    width: 60px;
+}
+
+.help-img-sharkie{
+    width: 100px;
 }
 
 .canvas-container{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.game-helper-container{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    height: 100vh;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-helper-button{
+    width: 160px;
+    height: 60px;
+    font-family: 'lilita', Arial, Helvetica, sans-serif;
+    background-color: #7FFFE0;
+    border-radius: 15px;
+    color: #531A82;
+    font-size: 25px ;
+    cursor: pointer;
+    border-color: white;
+}
+
+.close-help-container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.close-icon{
+    margin: 5px;
+    cursor: pointer;
+}
+
+.close-icon:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 100%;
+}
+
+.nav:hover{
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 @media only screen and (max-width: 720px){

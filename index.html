@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +17,7 @@
     <script src="models/jelly.class.js"></script>
     <script src="models/jelly-super.class.js"></script>
     <script src="models/status-bar.class.js"></script>
-    
+
     <script src="models/world.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/endboss.class.js"></script>
@@ -30,25 +31,29 @@
     <script src="models/collectables.class.js"></script>
     <script src="models/chest.class.js"></script>
     <script src="models/poison.class.js"></script>
-    
+
     <script src="js/game.js"></script>
     <script src="level/level1.collectables.js"></script>
     <script src="level/level1.js"></script>
     <script src="level/level1.enemy.js"></script>
     <script src="level/level1.barrier.js"></script>
-    
 
-    
+
+
 </head>
+
 <body onload="init()">
 
-    
+
     <div class="canvas-container">
-    <h1>Sharkie</h1>
-    <img id="startgame" onclick="startGame()" class="start-game" src="img/6.Botones/Start/2.png" alt="">
-    <canvas id="canvas" width="720px" height="480px">
+        <div id="header" class="header">
+            <h1>Sharkie</h1>
+            <img id="startgame" onclick="startGame()" class="start-game" src="img/6.Botones/Start/2.png" alt="">
+        </div>
+        <div id="gamecontainer"></div>
+        <div class="game-helper-container d-none" id="gamehelper"></div>
+
     </div>
-    </canvas>
-    
 </body>
+
 </html>

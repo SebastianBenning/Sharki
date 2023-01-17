@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     width = 400;
     y = 0;
     hadfirstContact = false;
-
+    win_sound = new Audio('audio/win.mp3');
 
     constructor() {
         super()
@@ -30,6 +30,7 @@ class Endboss extends MovableObject {
             else if (this.isDead()) {
                 let i = this.currentImage % ENEMYS['boss_dead'].length;
                 this.playAnimation(ENEMYS['boss_dead']);
+                this.win_sound.play();
                 if (i == 4) {
                     clearInterval(intervalboss);
                     endbossisDead = true;

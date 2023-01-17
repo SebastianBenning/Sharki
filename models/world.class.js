@@ -19,7 +19,7 @@ class World {
     bubble = [];
     poisonbubble = [];
     coins = 0;
-    poison = 00;
+    poison = 0;
     worldistriggerd = false;
     inervalworld = false;
     allcoins = false;

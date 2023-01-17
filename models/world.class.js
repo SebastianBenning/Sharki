@@ -19,7 +19,7 @@ class World {
     bubble = [];
     poisonbubble = [];
     coins = 0;
-    poison = 10;
+    poison = 00;
     worldistriggerd = false;
     inervalworld = false;
     allcoins = false;
@@ -266,7 +266,7 @@ class World {
         if (!(mo.img == undefined)) {
             mo.draw(this.ctx);
         }
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

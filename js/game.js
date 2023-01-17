@@ -5,7 +5,7 @@ let characterisDead = false;
 let endbossisDead = false;
 let gamehelperval = false;
 function init() {
-       
+    checkGameEnd();
 }
 
 function startGame(){
@@ -125,7 +125,45 @@ function fullScreen(){
     
 }
 
+function checkGameEnd(){
+    let content= document.getElementById('gamecontainer');
+    let worldsinterval =setInterval(()=>{
+    if(characterisDead){
+        setTimeout(() => {
+            content.innerHTML= endScreenCharacterHtml();
+            clearInterval(worldsinterval);
+        }, 2000);    
+    }
+    else if(endbossisDead){
+        setTimeout(() => {
+            content.innerHTML= endScreenEndbossHtml();
+            clearInterval(worldsinterval);
+        }, 2000);
+    }
+}, 250);
+}
 
+function restartLevel(){
+    location.reload();
+}
+
+function endScreenEndbossHtml(){
+    return`
+    <div class="header">
+        <h1>You Win!</h1>
+        <img onclick="restartLevel()" src="img/6.Botones/Try again/Recurso 17.png" alt="" class="try-again-button">
+    </div>
+    `
+}
+
+function endScreenCharacterHtml(){
+    return`
+    <div class="header">
+        <h1>Game Over</h1>
+        <img onclick="restartLevel()" src="img/6.Botones/Try again/Recurso 17.png" alt="" class="try-again-button">
+    </div>
+    `
+}
 
 function gameHelperHtml(){
     return`

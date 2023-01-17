@@ -32,6 +32,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(ENEMYS['boss_dead']);
                 if (i == 4) {
                     clearInterval(intervalboss);
+                    endbossisDead = true;
                 }
             }
             else {

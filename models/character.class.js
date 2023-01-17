@@ -69,6 +69,7 @@ class Character extends MovableObject {
                 this.playAnimation(SHARKIE_IMAGES['dead']);
                 if (i == 11) {
                     clearInterval(stopintercharacter);
+                    characterisDead = true;
                 }
             }
             else if (this.isHurt()) {

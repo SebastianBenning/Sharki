@@ -4,29 +4,56 @@ let keyboard = new Keyboard();
 let characterisDead = false;
 let endbossisDead = false;
 let gamehelperval = false;
+let soundonoff = false;
 function init() {
     checkGameEnd();
 }
 
-function startGame(){
+function startGame() {
+
     document.getElementById('startgame').classList.add('d-none');
     document.getElementById('header').classList.remove('header');
     let game = document.getElementById('gamecontainer');
-    game.innerHTML='';
-    game.innerHTML= canvasHtml();
+    checkMobile(game);
+
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
-function canvasHtml(){
-    return `<div id="settings" class="setting-container">
-            <canvas id="canvas" width="720px" height="480px"></canvas>
-            <div class="button-container">
-            <button onclick="fullScreen()" title="Fullscreen" class="nav"><img class="nav-icon" src="img/vollbild.png" alt=""></button>
-            <button onclick="" title="Sound On/Off" class="nav"><img class="nav-icon" src="img/no-sound.png" alt=""></button>
-            <button onclick="gamehelper()" title="Help" class="nav"><img class="nav-icon" src="img/help.png" alt=""></button>
-            </div>
-        </div>`
+function checkMobile(game) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.getElementById('desktopgame').classList.add('d-none');
+        let mobilegame = document.getElementById('mobilecontainer');
+        mobilegame.innerHTML = '';
+        mobilegame.innerHTML = canvasMobileHtml();
+        
+        console.log("mobile device");
+    } else {
+        let game = document.getElementById('gamecontainer');
+        game.innerHTML = '';
+        game.innerHTML = canvasHtml();
+        console.log("not mobile device");
+    }
+}
+
+function canvasMobileHtml() {
+    return `
+    <div class="mobilecontainer">
+    <canvas id="canvas" width="720px" height="480px"></canvas>
+    </div>
+    `
+}
+
+function canvasHtml() {
+    return `
+    <div id="settings" class="setting-container">
+        <canvas id="canvas" width="720px" height="480px"></canvas>
+        <div class="button-container">
+        <button onclick="fullScreen()" title="Fullscreen" class="nav"><img class="nav-icon" src="img/vollbild.png" alt=""></button>
+        <button onclick="soundOnOff()" title="Sound On/Off" class="nav"><img id="sound-img" class="nav-icon" src="img/no-sound.png" alt=""></button>
+        <button onclick="gamehelper()" title="Help" class="nav"><img class="nav-icon" src="img/help.png" alt=""></button>
+        </div>
+    </div>`
 }
 
 window.addEventListener("keydown", (e) => {
@@ -91,64 +118,73 @@ window.addEventListener("keyup", (e) => {
 
 });
 
-function openGamehelper(){
+function openGamehelper() {
     document.getElementById('infoForGame').classList.remove('d-none');
 }
 
-function closeGamehelper(){
+function closeGamehelper() {
     document.getElementById('gamehelper').classList.add('d-none');
 }
 
-function gamehelper(){
-    if(!gamehelperval){
-    let container = document.getElementById('gamehelper');
-    container.classList.remove('d-none');
-    container.innerHTML= '';
-    container.innerHTML= gameHelperHtml();
-    gamehelperval = true;
+function gamehelper() {
+    if (!gamehelperval) {
+        let container = document.getElementById('gamehelper');
+        container.classList.remove('d-none');
+        container.innerHTML = '';
+        container.innerHTML = gameHelperHtml();
+        gamehelperval = true;
     }
-    else{
+    else {
         document.getElementById('gamehelper').classList.add('d-none');
         gamehelperval = false;
     }
 }
 
-function fullScreen(){
+function fullScreen() {
     let el = document.getElementById('canvas');
- 
-           if(el.webkitRequestFullScreen) {
-               el.webkitRequestFullScreen();
-           }
-          else {
-             el.mozRequestFullScreen();
-          }  
-    
+    if (el.webkitRequestFullScreen) {
+        el.webkitRequestFullScreen();
+    }
+    else {
+        el.mozRequestFullScreen();
+    }
 }
 
-function checkGameEnd(){
-    let content= document.getElementById('gamecontainer');
-    let worldsinterval =setInterval(()=>{
-    if(characterisDead){
-        setTimeout(() => {
-            content.innerHTML= endScreenCharacterHtml();
-            clearInterval(worldsinterval);
-        }, 2000);    
+function soundOnOff() {
+    if (!soundonoff) {
+        soundonoff = true;
+        document.getElementById('sound-img').src = 'img/speaker-filled-audio-tool.png';
     }
-    else if(endbossisDead){
-        setTimeout(() => {
-            content.innerHTML= endScreenEndbossHtml();
-            clearInterval(worldsinterval);
-        }, 2000);
+    else {
+        soundonoff = false;
+        document.getElementById('sound-img').src = 'img/no-sound.png';
     }
-}, 250);
 }
 
-function restartLevel(){
+function checkGameEnd() {
+    let content = document.getElementById('gamecontainer');
+    let worldsinterval = setInterval(() => {
+        if (characterisDead) {
+            setTimeout(() => {
+                content.innerHTML = endScreenCharacterHtml();
+                clearInterval(worldsinterval);
+            }, 2000);
+        }
+        else if (endbossisDead) {
+            setTimeout(() => {
+                content.innerHTML = endScreenEndbossHtml();
+                clearInterval(worldsinterval);
+            }, 2000);
+        }
+    }, 250);
+}
+
+function restartLevel() {
     location.reload();
 }
 
-function endScreenEndbossHtml(){
-    return`
+function endScreenEndbossHtml() {
+    return `
     <div class="header">
         <h1>You Win!</h1>
         <img onclick="restartLevel()" src="img/6.Botones/Try again/Recurso 17.png" alt="" class="try-again-button">
@@ -156,8 +192,8 @@ function endScreenEndbossHtml(){
     `
 }
 
-function endScreenCharacterHtml(){
-    return`
+function endScreenCharacterHtml() {
+    return `
     <div class="header">
         <h1>Game Over</h1>
         <img onclick="restartLevel()" src="img/6.Botones/Try again/Recurso 17.png" alt="" class="try-again-button">
@@ -165,8 +201,8 @@ function endScreenCharacterHtml(){
     `
 }
 
-function gameHelperHtml(){
-    return`
+function gameHelperHtml() {
+    return `
     <div class="close-help-container" ><img onclick="closeGamehelper()" class="close-icon" src="img/close.png" alt=""></div>
     <h2>Help</h2>
             <div class="help-box">

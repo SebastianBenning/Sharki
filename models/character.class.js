@@ -38,12 +38,16 @@ class Character extends MovableObject {
             if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp && !this.isDead()) {
                 this.y -= this.speed;
                 this.cameraSetYUpDown();
-                this.walking_sound.play();
+                if (soundonoff) {
+                    this.walking_sound.play();
+                }
             }
             if (this.world.keyboard.DOWN && !this.isCollidingWithBarrierDown && !this.isDead()) {
                 this.y += this.speed;
                 this.cameraSetYUpDown();
-                this.walking_sound.play();
+                if (soundonoff) {
+                    this.walking_sound.play();
+                }
             }
         }, 1000 / 60);
 
@@ -53,13 +57,17 @@ class Character extends MovableObject {
                 this.x += this.speed;
                 this.otherDirection = false;
                 this.cameraSetXRightLeft();
-                this.walking_sound.play();
+                if (soundonoff) {
+                    this.walking_sound.play();
+                }
             }
             if (this.world.keyboard.LEFT && !this.isCollidingWithBarrierLeft && !this.isDead()) {
                 this.x -= this.speed;
                 this.otherDirection = true;
                 this.cameraSetXRightLeft();
-                this.walking_sound.play();
+                if (soundonoff) {
+                    this.walking_sound.play();
+                }
             }
 
         }, 1000 / 60);
@@ -69,7 +77,9 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 let i = this.currentImage % SHARKIE_IMAGES['dead'].length;
                 this.playAnimation(SHARKIE_IMAGES['dead']);
-                this.lost_sound.play();
+                if (soundonoff) {
+                    this.lost_sound.play();
+                }
                 if (i == 11) {
                     clearInterval(stopintercharacter);
                     characterisDead = true;
@@ -77,7 +87,9 @@ class Character extends MovableObject {
             }
             else if (this.isHurt()) {
                 this.playAnimation(SHARKIE_IMAGES['hurt']);
-                this.elektrik_sound.play();
+                if (soundonoff) {
+                    this.elektrik_sound.play();
+                }
             }
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(SHARKIE_IMAGES['swim']);

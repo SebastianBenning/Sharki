@@ -30,7 +30,9 @@ class Endboss extends MovableObject {
             else if (this.isDead()) {
                 let i = this.currentImage % ENEMYS['boss_dead'].length;
                 this.playAnimation(ENEMYS['boss_dead']);
-                this.win_sound.play();
+                if (soundonoff) {
+                    this.win_sound.play();
+                }
                 if (i == 4) {
                     clearInterval(intervalboss);
                     endbossisDead = true;

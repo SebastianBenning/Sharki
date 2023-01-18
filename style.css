@@ -112,6 +112,11 @@ canvas{
     align-items: center;
 }
 
+.mobilecontainer{
+    width: 100vw;
+    height: 100vh;
+}
+
 .game-helper-container{
     position: absolute;
     top: 0%;
@@ -177,3 +182,4 @@ canvas{
         height: 100vh;
     }
 }
+

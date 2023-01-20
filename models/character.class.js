@@ -29,6 +29,7 @@ class Character extends MovableObject {
         this.loadImages(SHARKIE_IMAGES['bubble_Trap']);
         this.loadImages(SHARKIE_IMAGES['poison_Bubble_Trap']);
         this.animate();
+        this.touchEvents();
     }
 
     animate() {
@@ -110,6 +111,68 @@ class Character extends MovableObject {
                 this.poisonBubbleTrapAttack();
             }
         }, 130);
+    }
+
+    touchEvents() {
+        document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            keyboard.RIGHT = true;
+        });
+
+        document.getElementById('btnRight').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keyboard.RIGHT = false;
+        });
+
+        document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            keyboard.LEFT = true;
+        });
+
+        document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keyboard.LEFT = false;
+        });
+
+        document.getElementById('btnUp').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            keyboard.UP = true;
+        });
+
+        document.getElementById('btnUp').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keyboard.UP = false;
+        });
+
+        document.getElementById('btnDown').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            keyboard.DOWN = true;
+        });
+
+        document.getElementById('btnDown').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keyboard.DOWN = false;
+        });
+
+        document.getElementById('btnBubble').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            keyboard.D = true;
+        });
+
+        document.getElementById('btnBubble').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keyboard.D = false;
+        });
+
+        document.getElementById('btnPoison').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            keyboard.F = true;
+        });
+
+        document.getElementById('btnPoison').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            keyboard.F = false;
+        });
     }
 
     // makes a poison bubble
@@ -204,16 +267,46 @@ class Character extends MovableObject {
 
     // aligns the camera depending on where the character is swimming
     cameraSetYUpDown() {
-        if (this.world.camera_y == -475 || this.world.camera_y == 0) {
-            if (this.y > 100 && this.y < 120) {
-                this.world.camera_y = -this.y + 100;
+        if (mobiledevice) {
+            if (canvasheiht < 850 && canvasheiht > 750) {
+                if (this.world.camera_y == -140 || this.world.camera_y == 0) {
+                    if (this.y > 100 && this.y < 120) {
+                        this.world.camera_y = -this.y + 100;
+                    }
+                    else if (this.y < 240 && this.y > 215) {
+                        this.world.camera_y = -this.y + 100;
+                    }
+                }
+                else {
+                    this.world.camera_y = -this.y + 100;
+                }
             }
-            else if (this.y < 575 && this.y > 550) {
-                this.world.camera_y = -this.y + 100;
+            else if (canvasheiht < 475 && canvasheiht > 350) {
+                if (this.world.camera_y == -475 || this.world.camera_y == 0) {
+                    if (this.y > 100 && this.y < 120) {
+                        this.world.camera_y = -this.y + 100;
+                    }
+                    else if (this.y < 575 && this.y > 550) {
+                        this.world.camera_y = -this.y + 100;
+                    }
+                }
+                else {
+                    this.world.camera_y = -this.y + 100;
+                }
             }
         }
-        else {
-            this.world.camera_y = -this.y + 100;
+        if (!mobiledevice) {
+            if (this.world.camera_y == -475 || this.world.camera_y == 0) {
+                if (this.y > 100 && this.y < 120) {
+                    this.world.camera_y = -this.y + 100;
+                }
+                else if (this.y < 575 && this.y > 550) {
+                    this.world.camera_y = -this.y + 100;
+                }
+            }
+            else {
+                this.world.camera_y = -this.y + 100;
+            }
         }
     }
 }

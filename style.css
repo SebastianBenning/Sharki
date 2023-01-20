@@ -14,6 +14,11 @@ body{
     min-height: 100vh;
     margin: 0;
     font-family: 'lilita', Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+.canvas-mobile{
+    overflow: hidden;
 }
 
 .d-none{
@@ -35,6 +40,7 @@ h2{
 canvas{
     display: block;
     border-radius: 8px;
+    z-index: 1;
 }
 
 .button-container{
@@ -127,6 +133,7 @@ canvas{
     display: flex;
     align-items: center;
     flex-direction: column;
+    border-radius: 8px 0 0 8px;
 }
 
 .game-helper-button{
@@ -171,15 +178,77 @@ canvas{
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-@media only screen and (max-width: 720px){
+.mobile-controller{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    
+}
+
+.mobile-akktion{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    
+}
+
+.mobile-controll-key{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 100%;
+    background-color: rgb(255 255 255 / 40%);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.mobile-controll-x{
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* @media only screen and (min-width: 720px){
     canvas {
         width: 100%;
     }
-}
+} */
 
-@media only screen and (max-height: 480px){
+/* @media only screen and (min-height: 480px){
     canvas {
         height: 100vh;
+        width: 100vw;
     }
+} */
+
+.animationFadeInRight {
+    animation: fadeInright 0.5s ease 0s 1 normal forwards;
 }
 
+@keyframes fadeInright {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

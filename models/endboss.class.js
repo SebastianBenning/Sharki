@@ -20,26 +20,28 @@ class Endboss extends MovableObject {
         this.moveLeft();
         let bossanimation = 0;
         let intervalboss = setInterval(() => {
-            if (bossanimation < 10) {
-                this.playAnimation(ENEMYS['boss_animation']);
-                bossanimation++;
-            }
-            else if (this.isHurt()) {
-                this.playAnimation(ENEMYS['boss_hurt']);
-            }
-            else if (this.isDead()) {
-                let i = this.currentImage % ENEMYS['boss_dead'].length;
-                this.playAnimation(ENEMYS['boss_dead']);
-                if (soundonoff) {
-                    this.win_sound.play();
+            if (this.hadfirstContact) {
+                if (bossanimation < 10) {
+                    this.playAnimation(ENEMYS['boss_animation']);
+                    bossanimation++;
                 }
-                if (i == 4) {
-                    clearInterval(intervalboss);
-                    endbossisDead = true;
+                else if (this.isHurt()) {
+                    this.playAnimation(ENEMYS['boss_hurt']);
                 }
-            }
-            else {
-                this.playAnimation(ENEMYS['boss_swim']);
+                else if (this.isDead()) {
+                    let i = this.currentImage % ENEMYS['boss_dead'].length;
+                    this.playAnimation(ENEMYS['boss_dead']);
+                    if (soundonoff) {
+                        this.win_sound.play();
+                    }
+                    if (i == 4) {
+                        clearInterval(intervalboss);
+                        endbossisDead = true;
+                    }
+                }
+                else {
+                    this.playAnimation(ENEMYS['boss_swim']);
+                }
             }
             if (this.hadfirstContact) {
                 this.moveLeft();

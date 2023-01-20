@@ -5,6 +5,9 @@ let characterisDead = false;
 let endbossisDead = false;
 let gamehelperval = false;
 let soundonoff = false;
+let canvaswith;
+let canvasheiht;
+let mobiledevice = false;
 function init() {
     checkGameEnd();
 }
@@ -13,21 +16,25 @@ function startGame() {
 
     document.getElementById('startgame').classList.add('d-none');
     document.getElementById('header').classList.remove('header');
-    let game = document.getElementById('gamecontainer');
-    checkMobile(game);
+    
+    checkMobile();
 
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
-function checkMobile(game) {
+function checkMobile() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         document.getElementById('desktopgame').classList.add('d-none');
         let mobilegame = document.getElementById('mobilecontainer');
         mobilegame.innerHTML = '';
-        mobilegame.innerHTML = canvasMobileHtml();
-        
-        console.log("mobile device");
+        canwidth = screen.width;
+        canheight = screen.height;
+        canvaswith = canwidth;
+        canvasheiht = canheight;
+        console.log( canvasheiht);
+        mobilegame.innerHTML = canvasMobileHtml(canwidth, canheight);   
+        mobiledevice = true;
     } else {
         let game = document.getElementById('gamecontainer');
         game.innerHTML = '';
@@ -36,10 +43,23 @@ function checkMobile(game) {
     }
 }
 
-function canvasMobileHtml() {
+function canvasMobileHtml(canwidth, canheight) {
     return `
     <div class="mobilecontainer">
-    <canvas id="canvas" width="720px" height="480px"></canvas>
+        <canvas id="canvas" width="${canwidth}" height="${canheight}" >
+        </canvas>
+        <div class="mobile-controller">
+            <button id="btnUp" class="mobile-controll-key"><img src="img/arrow-up.png" alt=""></button>
+            <div class="mobile-controll-x">
+                <button id="btnLeft" class="mobile-controll-key"><img src="img/left-arrow.png" alt=""></button>
+                <button id="btnRight" class="mobile-controll-key"><img src="img/right-arrow.png" alt=""></button>
+            </div>
+            <button id="btnDown" class="mobile-controll-key"><img src="img/arrow-down.png" alt=""></button>
+        </div>
+        <div class="mobile-akktion">
+        <button id="btnBubble" class="mobile-controll-key">Bubble</button>
+        <button id="btnPoison" class="mobile-controll-key">Poison Bubble</button>
+        </div>
     </div>
     `
 }

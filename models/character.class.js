@@ -114,65 +114,67 @@ class Character extends MovableObject {
     }
 
     touchEvents() {
-        document.getElementById('btnRight').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            keyboard.RIGHT = true;
-        });
+        if (mobiledevice) {
+            document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                keyboard.RIGHT = true;
+            });
 
-        document.getElementById('btnRight').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            keyboard.RIGHT = false;
-        });
+            document.getElementById('btnRight').addEventListener('touchend', (e) => {
+                e.preventDefault();
+                keyboard.RIGHT = false;
+            });
 
-        document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            keyboard.LEFT = true;
-        });
+            document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                keyboard.LEFT = true;
+            });
 
-        document.getElementById('btnLeft').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            keyboard.LEFT = false;
-        });
+            document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+                e.preventDefault();
+                keyboard.LEFT = false;
+            });
 
-        document.getElementById('btnUp').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            keyboard.UP = true;
-        });
+            document.getElementById('btnUp').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                keyboard.UP = true;
+            });
 
-        document.getElementById('btnUp').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            keyboard.UP = false;
-        });
+            document.getElementById('btnUp').addEventListener('touchend', (e) => {
+                e.preventDefault();
+                keyboard.UP = false;
+            });
 
-        document.getElementById('btnDown').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            keyboard.DOWN = true;
-        });
+            document.getElementById('btnDown').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                keyboard.DOWN = true;
+            });
 
-        document.getElementById('btnDown').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            keyboard.DOWN = false;
-        });
+            document.getElementById('btnDown').addEventListener('touchend', (e) => {
+                e.preventDefault();
+                keyboard.DOWN = false;
+            });
 
-        document.getElementById('btnBubble').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            keyboard.D = true;
-        });
+            document.getElementById('btnBubble').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                keyboard.D = true;
+            });
 
-        document.getElementById('btnBubble').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            keyboard.D = false;
-        });
+            document.getElementById('btnBubble').addEventListener('touchend', (e) => {
+                e.preventDefault();
+                keyboard.D = false;
+            });
 
-        document.getElementById('btnPoison').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            keyboard.F = true;
-        });
+            document.getElementById('btnPoison').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                keyboard.F = true;
+            });
 
-        document.getElementById('btnPoison').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            keyboard.F = false;
-        });
+            document.getElementById('btnPoison').addEventListener('touchend', (e) => {
+                e.preventDefault();
+                keyboard.F = false;
+            });
+        }
     }
 
     // makes a poison bubble

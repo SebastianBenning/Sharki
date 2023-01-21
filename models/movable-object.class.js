@@ -63,9 +63,8 @@ class MovableObject extends DrawableObject {
         }
 
         if (this.world.keyboard.DOWN == true && collidingWithBarrierY && !this.isCollidingWithBarrierUp) {
-            this.isCollidingWithBarrierDown = true;
+            this.isCollidingWithBarrierDown = true;    
         }
-
     }
 
     hitSuper() {

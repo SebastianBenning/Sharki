@@ -14,6 +14,7 @@ class Character extends MovableObject {
         left: 60,
         right: 70
     }
+    attack = false;
     checkAlreadyRunning = false;
     world;
     walking_sound = new Audio('audio/swim.mp3');
@@ -36,41 +37,8 @@ class Character extends MovableObject {
         // look what key i press, if i hit a barrier and if the character is dead
         setInterval(() => {
             this.walking_sound.pause();
-            if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp && !this.isDead()) {
-                this.y -= this.speed;
-                this.cameraSetYUpDown();
-                if (soundonoff) {
-                    this.walking_sound.play();
-                }
-            }
-            if (this.world.keyboard.DOWN && !this.isCollidingWithBarrierDown && !this.isDead()) {
-                this.y += this.speed;
-                this.cameraSetYUpDown();
-                if (soundonoff) {
-                    this.walking_sound.play();
-                }
-            }
-        }, 1000 / 60);
-
-        // look what key i press, if i hit a barrier and if the character is dead
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight && !this.isDead()) {
-                this.x += this.speed;
-                this.otherDirection = false;
-                this.cameraSetXRightLeft();
-                if (soundonoff) {
-                    this.walking_sound.play();
-                }
-            }
-            if (this.world.keyboard.LEFT && !this.isCollidingWithBarrierLeft && !this.isDead()) {
-                this.x -= this.speed;
-                this.otherDirection = true;
-                this.cameraSetXRightLeft();
-                if (soundonoff) {
-                    this.walking_sound.play();
-                }
-            }
-
+            this.walkingUpDown();
+            this.walkingLeftRight();
         }, 1000 / 60);
 
         // look what move the character makes
@@ -102,15 +70,57 @@ class Character extends MovableObject {
 
         // see what attack is executed
         setInterval(() => {
-            if (this.world.keyboard.D) {
-                this.playAnimation(SHARKIE_IMAGES['bubble_Trap']);
-                this.bubbleTrapAttack();
-            }
-            else if (this.world.keyboard.F) {
-                this.playAnimation(SHARKIE_IMAGES['poison_Bubble_Trap']);
-                this.poisonBubbleTrapAttack();
-            }
+            this.charAttack();
         }, 130);
+    }
+
+    charAttack() {
+        if (this.world.keyboard.D) {
+            this.playAnimation(SHARKIE_IMAGES['bubble_Trap']);
+            let i = this.currentImage % SHARKIE_IMAGES['bubble_Trap'].length;
+            console.log(i);
+            this.bubbleTrapAttack();
+        }
+        else if (this.world.keyboard.F) {
+            this.playAnimation(SHARKIE_IMAGES['poison_Bubble_Trap']);
+            this.poisonBubbleTrapAttack();
+        }
+    }
+
+    walkingLeftRight() {
+        if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight && !this.isDead()) {
+            this.x += this.speed;
+            this.otherDirection = false;
+            this.cameraSetXRightLeft();
+            if (soundonoff) {
+                this.walking_sound.play();
+            }
+        }
+        if (this.world.keyboard.LEFT && !this.isCollidingWithBarrierLeft && !this.isDead()) {
+            this.x -= this.speed;
+            this.otherDirection = true;
+            this.cameraSetXRightLeft();
+            if (soundonoff) {
+                this.walking_sound.play();
+            }
+        }
+    }
+
+    walkingUpDown() {
+        if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp && !this.isDead()) {
+            this.y -= this.speed;
+            this.cameraSetYUpDown();
+            if (soundonoff) {
+                this.walking_sound.play();
+            }
+        }
+        if (this.world.keyboard.DOWN && !this.isCollidingWithBarrierDown && !this.isDead()) {
+            this.y += this.speed;
+            this.cameraSetYUpDown();
+            if (soundonoff) {
+                this.walking_sound.play();
+            }
+        }
     }
 
     touchEvents() {

@@ -236,7 +236,7 @@ function gameHelperHtml() {
                 <img class="help-img-jelly" src="img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png" alt="">
             </div>
             <div class="help-box">
-                <img class="help-img-key" src="img/6.Botones/Key/F_key.png" alt="">
+                <img class="help-img-key" src="img/6.Botones/Key/F key.png" alt="">
                 <h3>Poison Bubble Attack</h3>
                 <img class="help-img-jelly" src="img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png" alt="">
             </div>

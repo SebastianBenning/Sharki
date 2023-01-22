@@ -19,7 +19,7 @@ class Chest extends MovableObject {
     animate() {
         this.intervalChest = [];
         this.intervalChest = setInterval(() => {
-            this.playAnimation(STATUS_BAR_IMAGES['chest']);
+            this.playAnimation(STATUS_BAR_IMAGES['chest'], 1);
         }, 180);
     }
 

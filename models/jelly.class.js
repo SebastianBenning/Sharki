@@ -21,9 +21,9 @@ class Jelly extends MovableObject {
         this.switschMove(start, end, direction, speed);
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(BUBBLE['jelly_BubbleTrap_Lila']);
+                this.playAnimation(BUBBLE['jelly_BubbleTrap_Lila'], 1);
             } else {
-                this.playAnimation(ENEMYS['jelly_Normal_Lila']);
+                this.playAnimation(ENEMYS['jelly_Normal_Lila'], 1);
             }
         }, 300);
     }

@@ -13,7 +13,7 @@ class Coin extends MovableObject{
 
     animate(){       
         setInterval(() =>{     
-            this.playAnimation(STATUS_BAR_IMAGES['images_coin']);
+            this.playAnimation(STATUS_BAR_IMAGES['images_coin'], 1);
         }, 180);
     }
 }

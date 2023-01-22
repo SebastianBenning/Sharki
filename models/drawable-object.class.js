@@ -4,6 +4,7 @@ class DrawableObject {
     img;
     imageCache = [];
     currentImage = 0;
+    attackImage = 0;
     height = 100;
     width = 100;
 

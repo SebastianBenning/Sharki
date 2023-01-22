@@ -22,15 +22,15 @@ class Endboss extends MovableObject {
         let intervalboss = setInterval(() => {
             if (this.hadfirstContact) {
                 if (bossanimation < 10) {
-                    this.playAnimation(ENEMYS['boss_animation']);
+                    this.playAnimation(ENEMYS['boss_animation'], 1);
                     bossanimation++;
                 }
                 else if (this.isHurt()) {
-                    this.playAnimation(ENEMYS['boss_hurt']);
+                    this.playAnimation(ENEMYS['boss_hurt'], 1);
                 }
                 else if (this.isDead()) {
                     let i = this.currentImage % ENEMYS['boss_dead'].length;
-                    this.playAnimation(ENEMYS['boss_dead']);
+                    this.playAnimation(ENEMYS['boss_dead'], 1);
                     if (soundonoff) {
                         this.win_sound.play();
                     }
@@ -40,7 +40,7 @@ class Endboss extends MovableObject {
                     }
                 }
                 else {
-                    this.playAnimation(ENEMYS['boss_swim']);
+                    this.playAnimation(ENEMYS['boss_swim'], 1);
                 }
             }
             if (this.hadfirstContact) {

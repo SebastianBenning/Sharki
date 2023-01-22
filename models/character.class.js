@@ -14,6 +14,7 @@ class Character extends MovableObject {
         left: 60,
         right: 70
     }
+    stopattack = false;
     attack = false;
     checkAlreadyRunning = false;
     world;
@@ -43,9 +44,10 @@ class Character extends MovableObject {
 
         // look what move the character makes
         let stopintercharacter = setInterval(() => {
+
             if (this.isDead()) {
                 let i = this.currentImage % SHARKIE_IMAGES['dead'].length;
-                this.playAnimation(SHARKIE_IMAGES['dead']);
+                this.playAnimation(SHARKIE_IMAGES['dead'], 1);
                 if (soundonoff) {
                     this.lost_sound.play();
                 }
@@ -55,35 +57,39 @@ class Character extends MovableObject {
                 }
             }
             else if (this.isHurt()) {
-                this.playAnimation(SHARKIE_IMAGES['hurt']);
+                this.playAnimation(SHARKIE_IMAGES['hurt'], 1);
                 if (soundonoff) {
                     this.elektrik_sound.play();
                 }
             }
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.playAnimation(SHARKIE_IMAGES['swim']);
+                this.playAnimation(SHARKIE_IMAGES['swim'], 1);
             }
             else {
-                this.playAnimation(SHARKIE_IMAGES['stay']);
+                this.playAnimation(SHARKIE_IMAGES['stay'], 1);
             }
+
         }, 130);
 
         // see what attack is executed
         setInterval(() => {
             this.charAttack();
+
         }, 130);
     }
 
     charAttack() {
         if (this.world.keyboard.D) {
-            this.playAnimation(SHARKIE_IMAGES['bubble_Trap']);
-            let i = this.currentImage % SHARKIE_IMAGES['bubble_Trap'].length;
-            console.log(i);
+            this.playAnimation(SHARKIE_IMAGES['bubble_Trap'], 0)
             this.bubbleTrapAttack();
         }
         else if (this.world.keyboard.F) {
-            this.playAnimation(SHARKIE_IMAGES['poison_Bubble_Trap']);
+            this.playAnimation(SHARKIE_IMAGES['poison_Bubble_Trap'], 0);
             this.poisonBubbleTrapAttack();
+        }
+        if (this.attackImage == 8) {
+            clearInterval(this.stopinterattack);
+            this.stopattack = false;
         }
     }
 

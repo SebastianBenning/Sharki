@@ -18,7 +18,7 @@ class Jellysuper extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(ENEMYS['jelly_Super_Green']);
+            this.playAnimation(ENEMYS['jelly_Super_Green'], 1);
             if (this.isDead()) {
                 this.goOut();
             }

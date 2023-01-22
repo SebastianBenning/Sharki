@@ -45,27 +45,29 @@ class World {
             this.checkCollisionsPoison();
             this.checkCollisionsBubble();
             this.checkCollisionsPoisonBubble();
+            this.checkCollisionsLevelbarrier();
             this.checkTriggerBoss();
         }, 1000 / 60);
 
-        setInterval(() => {
-            this.levelbarrier.backgroundbarrier.forEach((ground) => {
-                let collindingWithBarrier = this.levelbarrier.backgroundbarrier.find(ground => this.character.isColliding(ground));
-                let collidingWithBarrierX = this.levelbarrier.backgroundbarrier.find(ground => this.character.isCollidingX(ground));
-                let collidingWithBarrierY = this.levelbarrier.backgroundbarrier.find(ground => this.character.isCollidingY(ground));
-                if (collindingWithBarrier) {
-                    this.isCollidingWithBarrier = true;
+    }
+
+    checkCollisionsLevelbarrier(){
+        this.levelbarrier.backgroundbarrier.forEach((ground) => {
+            let collindingWithBarrier = this.levelbarrier.backgroundbarrier.find(ground => this.character.isColliding(ground));
+            let collidingWithBarrierX = this.levelbarrier.backgroundbarrier.find(ground => this.character.isCollidingX(ground));
+            let collidingWithBarrierY = this.levelbarrier.backgroundbarrier.find(ground => this.character.isCollidingY(ground));
+            if (collindingWithBarrier) {
+                this.isCollidingWithBarrier = true;
+            }
+            else {
+                this.characterNotHit();
+            }
+            if (this.character.isColliding(ground)) {
+                if (this.isCollidingWithBarrier == true) {
+                    this.character.hitground(collidingWithBarrierY, collidingWithBarrierX);
                 }
-                else {
-                    this.characterNotHit();
-                }
-                if (this.character.isColliding(ground)) {
-                    if (this.isCollidingWithBarrier == true) {
-                        this.character.hitground(collidingWithBarrierY, collidingWithBarrierX);
-                    }
-                }
-            });
-        }, 1000 / 60)
+            }
+        });
     }
 
     characterNotHit() {
@@ -231,6 +233,18 @@ class World {
         this.addObjectsToMap(this.levelbarrier.backgroundbarrier);
         this.addObjectsToMap(this.levelenemy.fish);
         this.addObjectsToMap(this.collectables.collectables);
+        this.triggerdColect();
+        
+        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-0, -this.camera_y);
+
+        let self = this;
+        requestAnimationFrame(function () {
+            self.draw();
+        });
+    }
+
+    triggerdColect(){
         if (this.worldistriggerd) {
             this.addObjectsToMap(this.triggerbarrier);
         }
@@ -244,13 +258,6 @@ class World {
         if (this.poisonbubble) {
             this.addObjectsToMap(this.poisonbubble);
         }
-        this.ctx.translate(-this.camera_x, 0);
-        this.ctx.translate(-0, -this.camera_y);
-
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
     }
 
     addObjectsToMap(objects) {

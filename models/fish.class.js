@@ -22,7 +22,7 @@ class Fish extends MovableObject {
         this.switschMove(start, end, direction, speed);
 
         setInterval(() => {
-            this.playAnimation(ENEMYS['fish_walking']);
+            this.playAnimation(ENEMYS['fish_walking'], 1);
         }, 130);
     }
 

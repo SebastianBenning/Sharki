@@ -61,7 +61,8 @@ let SHARKIE_IMAGES = {
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
-        // 'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
+        
     ],
 
     'poison_Bubble_Trap':[

@@ -7,6 +7,8 @@ class MovableObject extends DrawableObject {
     startendy = false;
     intervalx = false;
     intervaly = false;
+    animationStarted = false;
+    // animationFinished = false;
     offset = {
         top: 0,
         bottom: 0,
@@ -30,9 +32,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    checkCollindingx(movableObject){
-        return this.y + this.height - this.offset.bottom - 5 > movableObject.y + movableObject.offset.top && 
-        this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom - 5;
+    checkCollindingx(movableObject) {
+        return this.y + this.height - this.offset.bottom - 5 > movableObject.y + movableObject.offset.top &&
+            this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom - 5;
     }
 
 
@@ -44,9 +46,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    checkCollindingy(movableObject){
-       return this.x + this.width - this.offset.right - 10 > movableObject.x + movableObject.offset.left && 
-        this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right - 10;
+    checkCollindingy(movableObject) {
+        return this.x + this.width - this.offset.right - 10 > movableObject.x + movableObject.offset.left &&
+            this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right - 10;
     }
 
     hitground(collidingWithBarrierY, collidingWithBarrierX) {
@@ -63,7 +65,7 @@ class MovableObject extends DrawableObject {
         }
 
         if (this.world.keyboard.DOWN == true && collidingWithBarrierY && !this.isCollidingWithBarrierUp) {
-            this.isCollidingWithBarrierDown = true;    
+            this.isCollidingWithBarrierDown = true;
         }
     }
 
@@ -116,7 +118,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
-    moveVertical(start, end, speed){
+    moveVertical(start, end, speed) {
         if (!this.intervalx) {
             if (this.x > start) {
                 this.startendx = true;
@@ -139,7 +141,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    moveHorizontal(start, end, speed){
+    moveHorizontal(start, end, speed) {
         if (!this.intervaly) {
             if (this.y > start) {
                 this.startendy = true;
@@ -173,18 +175,35 @@ class MovableObject extends DrawableObject {
     }
 
     moveLeft() {
-      let stopinter =  setInterval(() => {
+        let stopinter = setInterval(() => {
             this.x -= 0.01;
-            if (this.isDead()){
+            if (this.isDead()) {
                 clearInterval(stopinter);
             }
         }, 1000 / 60);
     }
 
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+    playAnimation(images, attack) {
+        if (attack == 0) {
+            if (!this.animationStarted) {
+                this.currentImage = 0;
+                this.animationStarted = true;
+            }
+            let i = this.currentImage % images.length;
+            let path = images[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+
+            if (i == 5 || 1 > 5) {
+                this.animationStarted = false;
+            }
+        }
+
+        else if (attack == 1) {
+            let i = this.currentImage % images.length;
+            let path = images[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        }
     }
 }

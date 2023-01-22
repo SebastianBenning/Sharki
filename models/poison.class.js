@@ -18,7 +18,7 @@ class Poison extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playAnimation(STATUS_BAR_IMAGES['poisonatack']);
+            this.playAnimation(STATUS_BAR_IMAGES['poisonatack'], 1);
 
         }, 180);
     }

@@ -44,40 +44,57 @@ class Character extends MovableObject {
 
         // look what move the character makes
         let stopintercharacter = setInterval(() => {
-
             if (this.isDead()) {
                 let i = this.currentImage % SHARKIE_IMAGES['dead'].length;
-                this.playAnimation(SHARKIE_IMAGES['dead'], 1);
-                if (soundonoff) {
-                    this.lost_sound.play();
-                }
+                this.charIsDead();
                 if (i == 11) {
                     clearInterval(stopintercharacter);
                     characterisDead = true;
                 }
             }
             else if (this.isHurt()) {
-                this.playAnimation(SHARKIE_IMAGES['hurt'], 1);
-                if (soundonoff) {
-                    this.elektrik_sound.play();
-                }
+                this.charisHurt();
             }
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.playAnimation(SHARKIE_IMAGES['swim'], 1);
+                this.charisSwimming();
             }
             else {
-                this.playAnimation(SHARKIE_IMAGES['stay'], 1);
+                this.charisStay();
             }
-
         }, 130);
 
-        // see what attack is executed
+        // interval for bubbleattack
         setInterval(() => {
             this.charAttack();
-
         }, 130);
     }
 
+    // sharkie is Staying
+    charisStay() {
+        this.playAnimation(SHARKIE_IMAGES['stay'], 1);
+    }
+
+    // sharkie is swimming
+    charisSwimming() {
+        this.playAnimation(SHARKIE_IMAGES['swim'], 1);
+    }
+
+    // sharkie is Hurt
+    charisHurt() {
+        this.playAnimation(SHARKIE_IMAGES['hurt'], 1);
+        if (soundonoff) {
+            this.elektrik_sound.play();
+        }
+    }
+
+    // sharkie is dead
+    charIsDead() {
+        this.playAnimation(SHARKIE_IMAGES['dead'], 1);
+        if (soundonoff) {
+            this.lost_sound.play();
+        }
+    }
+    // sharkies Bubble attack 
     charAttack() {
         if (this.world.keyboard.D) {
             this.playAnimation(SHARKIE_IMAGES['bubble_Trap'], 0)
@@ -92,7 +109,7 @@ class Character extends MovableObject {
             this.stopattack = false;
         }
     }
-
+    // sharkie's running animation and camera work
     walkingLeftRight() {
         if (this.world.keyboard.RIGHT && !this.isCollidingWithBarrierRight && !this.isDead()) {
             this.x += this.speed;
@@ -111,7 +128,7 @@ class Character extends MovableObject {
             }
         }
     }
-
+    // sharkie's running animation and camera work
     walkingUpDown() {
         if (this.world.keyboard.UP && this.y > -110 && !this.isCollidingWithBarrierUp && !this.isDead()) {
             this.y -= this.speed;
@@ -128,7 +145,7 @@ class Character extends MovableObject {
             }
         }
     }
-
+    // for touchdisplays
     touchEvents() {
         if (mobiledevice) {
             document.getElementById('btnRight').addEventListener('touchstart', (e) => {
@@ -286,34 +303,44 @@ class Character extends MovableObject {
     // aligns the camera depending on where the character is swimming
     cameraSetYUpDown() {
         if (mobiledevice) {
-            if (canvasheiht < 850 && canvasheiht > 750) {
-                if (this.world.camera_y == -140 || this.world.camera_y == 0) {
-                    if (this.y > 100 && this.y < 120) {
-                        this.world.camera_y = -this.y + 100;
-                    }
-                    else if (this.y < 240 && this.y > 215) {
-                        this.world.camera_y = -this.y + 100;
-                    }
-                }
-                else {
-                    this.world.camera_y = -this.y + 100;
-                }
-            }
-            else if (canvasheiht < 475 && canvasheiht > 350) {
-                if (this.world.camera_y == -475 || this.world.camera_y == 0) {
-                    if (this.y > 100 && this.y < 120) {
-                        this.world.camera_y = -this.y + 100;
-                    }
-                    else if (this.y < 575 && this.y > 550) {
-                        this.world.camera_y = -this.y + 100;
-                    }
-                }
-                else {
-                    this.world.camera_y = -this.y + 100;
-                }
-            }
+            this.mobileY();
         }
         if (!mobiledevice) {
+            this.notMobileY();
+        }
+    }
+
+    // desktop camera setting
+    notMobileY() {
+        if (this.world.camera_y == -475 || this.world.camera_y == 0) {
+            if (this.y > 100 && this.y < 120) {
+                this.world.camera_y = -this.y + 100;
+            }
+            else if (this.y < 575 && this.y > 550) {
+                this.world.camera_y = -this.y + 100;
+            }
+        }
+        else {
+            this.world.camera_y = -this.y + 100;
+        }
+    }
+
+    // mobile camera setting
+    mobileY() {
+        if (canvasheiht < 850 && canvasheiht > 750) {
+            if (this.world.camera_y == -140 || this.world.camera_y == 0) {
+                if (this.y > 100 && this.y < 120) {
+                    this.world.camera_y = -this.y + 100;
+                }
+                else if (this.y < 240 && this.y > 215) {
+                    this.world.camera_y = -this.y + 100;
+                }
+            }
+            else {
+                this.world.camera_y = -this.y + 100;
+            }
+        }
+        else if (canvasheiht < 475 && canvasheiht > 350) {
             if (this.world.camera_y == -475 || this.world.camera_y == 0) {
                 if (this.y > 100 && this.y < 120) {
                     this.world.camera_y = -this.y + 100;

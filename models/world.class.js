@@ -38,6 +38,7 @@ class World {
         this.character.world = this;
     }
 
+    // interval for all collisions
     run() {
         setInterval(() => {
             this.checkCollisionsEnemy();
@@ -51,6 +52,7 @@ class World {
 
     }
 
+    // see if sharkie touches a barrier
     checkCollisionsLevelbarrier(){
         this.levelbarrier.backgroundbarrier.forEach((ground) => {
             let collindingWithBarrier = this.levelbarrier.backgroundbarrier.find(ground => this.character.isColliding(ground));
@@ -78,6 +80,7 @@ class World {
         this.character.isCollidingWithBarrierLeft = false;
     }
 
+    // see if sharkie touches a poisonflask
     checkCollisionsPoison() {
         if (this.character.isColliding(this.poisonflask)) {
             if (!this.hitpoison) {
@@ -105,6 +108,7 @@ class World {
         }
     }
 
+    // see if sharkie touches a Collactable(coins)
     checkCollisionsCollactable() {
         this.collectables.collectables.forEach((coin) => {
             if (this.character.isColliding(coin)) {
@@ -139,6 +143,7 @@ class World {
         })
     }
 
+    // restarts the animation of the chest
     startChestAnimation() {
         setTimeout(() => {
             this.collectables.collectables[0].animate();
@@ -155,6 +160,7 @@ class World {
         return this.collectables.collectables[0].img.currentSrc == this.collectables.collectables[0].closedPic.currentSrc;
     }
 
+    // see if sharkie touches a Enemy
     checkCollisionsEnemy() {
         this.levelenemy.fish.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -177,6 +183,7 @@ class World {
         }, 400)
     }
 
+    // see if Bubble hit a Enemy
     checkCollisionsBubble() {
         this.levelenemy.fish.forEach((enemy) => {
             this.bubble.forEach((bubble) => {
@@ -193,6 +200,7 @@ class World {
         return enemy.isColliding(bubble) && enemy instanceof Jelly;
     }
 
+    // see if poison Bubble hit a Enemy
     checkCollisionsPoisonBubble() {
         this.levelenemy.fish.forEach((enemy) => {
             this.poisonbubble.forEach((poisonbubble) => {
@@ -209,6 +217,7 @@ class World {
         return enemy.isColliding(poisonbubble) && enemy instanceof Jellysuper || enemy.isColliding(poisonbubble) && enemy instanceof Endboss;
     }
 
+    // animates the boss from a certain number of pixels
     checkTriggerBoss() {
         if (this.character.x > 1700 && this.character.y < 400 && !this.worldistriggerd) {
             this.levelenemy.fish[25].istriggerd = true;

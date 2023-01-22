@@ -16,6 +16,7 @@ class MovableObject extends DrawableObject {
         right: 0
     }
 
+    // Checks if 2 objects collide and returns a boolean
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -23,8 +24,7 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
-
-
+    // Checks if 2 objects on x-axis collide and returns a boolean
     isCollidingX(movableObject) {
         if (this.checkCollindingx(movableObject)) {
             return this.x + this.width - this.offset.right > movableObject.x + movableObject.offset.left &&
@@ -37,8 +37,7 @@ class MovableObject extends DrawableObject {
             this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom - 5;
     }
 
-
-
+    // Checks if 2 objects on y-axis collide and returns a boolean
     isCollidingY(movableObject) {
         if (this.checkCollindingy(movableObject)) {
             return this.y + this.height - this.offset.bottom > movableObject.y + movableObject.offset.top &&
@@ -51,6 +50,7 @@ class MovableObject extends DrawableObject {
             this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right - 10;
     }
 
+    // character hit a barrier
     hitground(collidingWithBarrierY, collidingWithBarrierX) {
         if (this.world.keyboard.RIGHT == true && collidingWithBarrierX && !this.isCollidingWithBarrierLeft) {
             this.isCollidingWithBarrierRight = true;
@@ -69,10 +69,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    // character hit a supperjelly
     hitSuper() {
         this.energy = 0;
     }
 
+    // Bubble hit Enemy
     hitenemy(attack) {
         this.energy -= attack;
         if (this.energy < 0) {
@@ -83,7 +85,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-
+    // character hit a Enemy
     hit() {
         this.energy -= 10;
         if (this.energy < 0) {
@@ -94,16 +96,19 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    // character is hurt
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
+    // character is dead
     isDead() {
         return this.energy == 0;
     }
 
+    // look in which direction the enemy is swimming
     switschMove(start, end, direction, speed) {
         setInterval(() => {
             if (this.isDead()) {
@@ -118,6 +123,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
+    // enemy move from right to left
     moveVertical(start, end, speed) {
         if (!this.intervalx) {
             if (this.x > start) {
@@ -141,6 +147,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    // enemy move from up to down
     moveHorizontal(start, end, speed) {
         if (!this.intervaly) {
             if (this.y > start) {
@@ -162,6 +169,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    // enemy hitten then go out of map
     goOut() {
         setInterval(() => {
             this.y -= 0.1;
@@ -183,6 +191,7 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
+    // animate all images
     playAnimation(images, attack) {
         if (attack == 0) {
             if (!this.animationStarted) {

@@ -15,7 +15,7 @@ class Poison extends MovableObject {
         this.width = 100;
         this.animate()
     }
-
+    // animate the PoisonFlask
     animate() {
         setInterval(() => {
             this.playAnimation(STATUS_BAR_IMAGES['poisonatack'], 1);

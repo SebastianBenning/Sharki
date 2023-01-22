@@ -8,15 +8,18 @@ class DrawableObject {
     height = 100;
     width = 100;
 
+    // Function to load images
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
+    // Draw image on context
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
+    // Load all images in Json imageCache for animation 
     loadImages(arr) {
         arr.forEach(path => {
             let img = new Image();
@@ -25,6 +28,7 @@ class DrawableObject {
         });
     }
 
+    // Draws a frame around objects for collision detection
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Fish || this instanceof BackgrondBarrier || this instanceof Coin || this instanceof Poison || this instanceof Jelly || this instanceof Bubble) {
             ctx.beginPath();

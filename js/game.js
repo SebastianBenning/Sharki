@@ -8,6 +8,7 @@ let soundonoff = false;
 let canvaswith;
 let canvasheiht;
 let mobiledevice = false;
+let closegamehelp = false;
 function init() {
     checkGameEnd();
 }
@@ -16,7 +17,7 @@ function startGame() {
 
     document.getElementById('startgame').classList.add('d-none');
     document.getElementById('header').classList.remove('header');
-    
+
     checkMobile();
 
     canvas = document.getElementById('canvas');
@@ -32,8 +33,8 @@ function checkMobile() {
         canheight = screen.height;
         canvaswith = canwidth;
         canvasheiht = canheight;
-        console.log( canvasheiht);
-        mobilegame.innerHTML = canvasMobileHtml(canwidth, canheight);   
+        console.log(canvasheiht);
+        mobilegame.innerHTML = canvasMobileHtml(canwidth, canheight);
         mobiledevice = true;
     } else {
         let game = document.getElementById('gamecontainer');
@@ -46,8 +47,7 @@ function checkMobile() {
 function canvasMobileHtml(canwidth, canheight) {
     return `
     <div class="mobilecontainer">
-        <canvas id="canvas" width="${canwidth}" height="${canheight}" >
-        </canvas>
+        <canvas id="canvas" width="${canwidth}" height="${canheight}" ></canvas>
         <div class="mobile-controller">
             <button id="btnUp" class="mobile-controll-key"><img src="img/arrow-up.png" alt=""></button>
             <div class="mobile-controll-x">
@@ -57,9 +57,14 @@ function canvasMobileHtml(canwidth, canheight) {
             <button id="btnDown" class="mobile-controll-key"><img src="img/arrow-down.png" alt=""></button>
         </div>
         <div class="mobile-akktion">
-        <button id="btnBubble" class="mobile-controll-key">Bubble</button>
-        <button id="btnPoison" class="mobile-controll-key">Poison Bubble</button>
+            <button id="btnBubble" class="mobile-controll-key">Bubble</button>
+            <button id="btnPoison" class="mobile-controll-key">Poison Bubble</button>
         </div>
+        <div class="mobile-interface">
+        <button onclick="soundOnOff()" title="Sound On/Off" class="nav"><img id="sound-img" class="nav-icon" src="img/no-sound.png" alt=""></button>
+        <button onclick="gamehelpermobile()" title="Help" class="nav"><img class="nav-icon" src="img/help.png" alt=""></button>
+        </div>
+        <div class="game-helper-container-mobile animationFadeInRight d-none" id="gamehelpermobile"></div> 
     </div>
     `
 }
@@ -143,7 +148,24 @@ function openGamehelper() {
 }
 
 function closeGamehelper() {
-    document.getElementById('gamehelper').classList.add('d-none');
+    if (closegamehelp) {
+        closegamehelp = false;
+        document.getElementById('gamehelpermobile').classList.add('d-none');
+    }
+    else {
+        document.getElementById('gamehelper').classList.add('d-none');
+    }
+}
+
+function gamehelpermobile() {
+    closegamehelp = true;
+    let container = document.getElementById('gamehelpermobile');
+    container.classList.remove('d-none');
+    container.innerHTML = '';
+    container.innerHTML = gameHelperHtml();
+    gamehelperval = true;
+
+
 }
 
 function gamehelper() {
@@ -225,6 +247,7 @@ function gameHelperHtml() {
     return `
     <div class="close-help-container" ><img onclick="closeGamehelper()" class="close-icon" src="img/close.png" alt=""></div>
     <h2>Help</h2>
+        <div class="displayd">
             <div class="help-box">
                 <img class="help-img" src="img/6.Botones/Key/arrow keys.png" alt="">
                 <h3>Move Sharkie</h3>
@@ -240,13 +263,14 @@ function gameHelperHtml() {
                 <h3>Poison Bubble Attack</h3>
                 <img class="help-img-jelly" src="img/2.Enemy/2 Jelly fish/Súper dangerous/Green 1.png" alt="">
             </div>
-            <div class="help-box">
+            <div class="help-box-game">
                 <button onclick="openGamehelper()" class="game-helper-button">Game Help</button>
             </div>
             <div id="infoForGame" class="d-none">
                 <h3>You Need 5 Coins for open the Chest.</h3>
                 <h3>You can refill your Poison Bar over and over again.</h3>
                 <h3>Go into the Final battle with enough Poisen Energy.</h3>
+            </div>
             </div>
     `;
 }

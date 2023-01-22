@@ -114,25 +114,7 @@ class World {
             if (this.character.isColliding(coin)) {
                 let coinIndex = this.collectables.collectables.indexOf(coin);
                 if (coinIndex == 0) {
-                    if (this.coins == 5) {
-                        if (!this.inervalworld) {
-                            if (this.chestOpenPic()) {
-                                this.inervalworld = true;
-                                clearInterval(this.chest);
-                                this.statusBarCoin.setPercentage(0, 'coin');
-                                setTimeout(() => {
-                                    this.allcoins = true;
-                                }, 1000);
-                            }
-                        }
-                    }
-                    else if (!this.inervalworld) {
-                        if (this.chestClosedPic()) {
-                            this.inervalworld = true;
-                            clearInterval(this.chest);
-                            this.startChestAnimation();
-                        }
-                    }
+                    this.chestInterval();
                 }
                 else {
                     this.coins++;
@@ -141,6 +123,28 @@ class World {
                 }
             }
         })
+    }
+
+    chestInterval(){
+        if (this.coins == 5) {
+            if (!this.inervalworld) {
+                if (this.chestOpenPic()) {
+                    this.inervalworld = true;
+                    clearInterval(this.chest);
+                    this.statusBarCoin.setPercentage(0, 'coin');
+                    setTimeout(() => {
+                        this.allcoins = true;
+                    }, 1000);
+                }
+            }
+        }
+        else if (!this.inervalworld) {
+            if (this.chestClosedPic()) {
+                this.inervalworld = true;
+                clearInterval(this.chest);
+                this.startChestAnimation();
+            }
+        }
     }
 
     // restarts the animation of the chest

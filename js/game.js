@@ -8,7 +8,9 @@ let soundonoff = false;
 let canvaswith;
 let canvasheiht;
 let mobiledevice = false;
+let mobilegameend = false;
 let closegamehelp = false;
+let content ;
 function init() {
     checkGameEnd();
 }
@@ -36,6 +38,7 @@ function checkMobile() {
         console.log(canvasheiht);
         mobilegame.innerHTML = canvasMobileHtml(canwidth, canheight);
         mobiledevice = true;
+        mobilegameend = true;
     } else {
         let game = document.getElementById('gamecontainer');
         game.innerHTML = '';
@@ -204,8 +207,13 @@ function soundOnOff() {
 }
 
 function checkGameEnd() {
-    let content = document.getElementById('gamecontainer');
     let worldsinterval = setInterval(() => {
+        if (mobilegameend) {
+            content = document.getElementById('mobilecontainer');
+        }
+        else {
+            content = document.getElementById('gamecontainer');
+        }
         if (characterisDead) {
             setTimeout(() => {
                 content.innerHTML = endScreenCharacterHtml();

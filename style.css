@@ -1,9 +1,9 @@
 @font-face {
-    font-family:'lilita';
+    font-family: 'lilita';
     src: url('fonts/LilitaOne-Regular.ttf') format('truetype');
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,40 +17,40 @@ body{
     overflow: hidden;
 }
 
-.canvas-mobile{
+.canvas-mobile {
     overflow: hidden;
 }
 
-.d-none{
+.d-none {
     display: none !important;
 }
 
-h1{
+h1 {
     font-size: 100px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     color: white;
     margin: 10px;
 }
 
-h2{
+h2 {
     font-size: 50px;
     text-decoration: underline;
 }
 
-canvas{
+canvas {
     display: block;
     border-radius: 8px;
     z-index: 1;
 }
 
-.button-container{
+.button-container {
     display: flex;
     justify-content: space-around;
     width: 720px;
     margin-top: 10px;
 }
 
-.nav{
+.nav {
     width: 58px;
     background-color: rgba(255, 255, 255, 0.4);
     border: none;
@@ -60,15 +60,15 @@ canvas{
 
 
 
-.nav-icon{
+.nav-icon {
     width: 100%;
 }
 
-.help-img-jelly{
+.help-img-jelly {
     width: 60px;
 }
 
-.header{
+.header {
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -78,17 +78,17 @@ canvas{
 
 
 
-.start-game{
+.start-game {
     width: 250px;
     cursor: pointer;
     padding: 15px;
 }
 
-.start-game:hover{
+.start-game:hover {
     width: 280px;
 }
 
-.help-box{
+.help-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -102,7 +102,7 @@ canvas{
     margin-bottom: 8px;
 }
 
-.help-box-game{
+.help-box-game {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,30 +116,30 @@ canvas{
     margin-bottom: 8px;
 }
 
-.help-img{
+.help-img {
     width: 100px;
 }
 
-.help-img-key{
+.help-img-key {
     width: 60px;
 }
 
-.help-img-sharkie{
+.help-img-sharkie {
     width: 100px;
 }
 
-.canvas-container{
+.canvas-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.mobilecontainer{
+.mobilecontainer {
     width: 100vw;
     height: 100vh;
 }
 
-.game-helper-container{
+.game-helper-container {
     position: absolute;
     top: 0%;
     right: 0%;
@@ -152,7 +152,7 @@ canvas{
     border-radius: 8px 0 0 8px;
 }
 
-.displayd{
+.displayd {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -160,7 +160,7 @@ canvas{
     width: 90%;
 }
 
-.game-helper-container-mobile{
+.game-helper-container-mobile {
     position: absolute;
     top: 0%;
     right: 0%;
@@ -174,49 +174,49 @@ canvas{
     z-index: 100;
 }
 
-.game-helper-button{
+.game-helper-button {
     width: 160px;
     height: 60px;
     font-family: 'lilita', Arial, Helvetica, sans-serif;
     background-color: #7FFFE0;
     border-radius: 15px;
     color: #531A82;
-    font-size: 25px ;
+    font-size: 25px;
     cursor: pointer;
     border-color: white;
 }
 
-.close-help-container{
+.close-help-container {
     width: 100%;
     display: flex;
     justify-content: end;
 }
 
-.close-icon{
+.close-icon {
     margin: 5px;
     cursor: pointer;
 }
 
-.try-again-button{
+.try-again-button {
     width: 350px;
     cursor: pointer;
 }
 
-.you-win{
+.you-win {
     margin-top: 20px;
     width: 450px;
 }
 
-.close-icon:hover{
+.close-icon:hover {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 100%;
 }
 
-.nav:hover{
+.nav:hover {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-.mobile-controller{
+.mobile-controller {
     position: absolute;
     bottom: 30px;
     left: 30px;
@@ -225,10 +225,10 @@ canvas{
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    
+
 }
 
-.mobile-akktion{
+.mobile-akktion {
     position: absolute;
     bottom: 30px;
     right: 30px;
@@ -237,17 +237,17 @@ canvas{
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    
+
 }
 
-.mobile-interface{
+.mobile-interface {
     position: absolute;
     top: 20px;
     right: 20px;
     z-index: 99;
 }
 
-.mobile-controll-key{
+.mobile-controll-key {
     width: 50px;
     height: 50px;
     border: none;
@@ -257,63 +257,71 @@ canvas{
     font-size: 12px;
 }
 
-.mobile-controll-x{
+.mobile-controll-x {
     width: 160px;
     display: flex;
     justify-content: space-between;
 }
 
-@media only screen and (max-height: 720px){
-    h2{
+@media only screen and (max-height: 720px) {
+    h2 {
         font-size: 30px;
     }
 
-    h3{
+    h3 {
         padding-left: 5px;
     }
 
-    .displayd{
+    .displayd {
         width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-    .help-box{
+    .help-box {
         width: 30%;
         margin-left: 5px;
         margin-right: 5px;
     }
 
-    .help-box-game{
+    .help-box-game {
         width: 30%;
         margin-left: 5px;
         margin-right: 5px;
     }
 }
 
-@media only screen and (max-height: 400px){
-
-    .help-box{
-        width: 25%;
-        
+@media only screen and (orientation:portrait) {
+    body {
+        height: 100vw;
+        transform: rotate(90deg);
     }
-    .help-img{
+}
+
+@media only screen and (max-height: 400px) {
+
+    .help-box {
+        width: 25%;
+
+    }
+
+    .help-img {
         width: 50px;
     }
 
-    .help-img-sharkie{
+    .help-img-sharkie {
         width: 60px;
     }
 
-    .help-img-key{
+    .help-img-key {
         width: 30px;
     }
 
-    .help-img-jelly{
+    .help-img-jelly {
         width: 30px;
     }
 
-    h3{
+    h3 {
         font-size: 15px;
         padding-left: 5px;
     }

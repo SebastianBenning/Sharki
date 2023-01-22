@@ -218,22 +218,21 @@ class Character extends MovableObject {
             this.activateF();
             if (!this.checkAlreadyRunning) {
                 if (!this.otherDirection) {
-                    setTimeout(() => {
-                        this.world.poison--;
-                        this.world.statusBarPoison.setPercentage(this.world.poison * 10, 'poison');
-                        let poisonbubble = new PoisonBubble(this.x + 200, this.y + 130, this.otherDirection);
-                        this.world.poisonbubble.push(poisonbubble);
-                    }, 500);
+                    this.poisonDirection(200);
                 } else {
-                    setTimeout(() => {
-                        this.world.poison--;
-                        this.world.statusBarPoison.setPercentage(this.world.poison * 10, 'poison');
-                        let poisonbubble = new PoisonBubble(this.x + 0, this.y + 130, this.otherDirection);
-                        this.world.poisonbubble.push(poisonbubble);
-                    }, 500);
+                    this.poisonDirection(0);
                 }
             }
         }
+    }
+
+    poisonDirection(x){
+        setTimeout(() => {
+            this.world.poison--;
+            this.world.statusBarPoison.setPercentage(this.world.poison * 10, 'poison');
+            let poisonbubble = new PoisonBubble(this.x + x, this.y + 130, this.otherDirection);
+            this.world.poisonbubble.push(poisonbubble);
+        }, 500);
     }
 
     // sets values ​​so that a bubble only appears every half second
@@ -257,17 +256,18 @@ class Character extends MovableObject {
         this.activateD();
         if (!this.checkAlreadyRunning) {
             if (!this.otherDirection) {
-                setTimeout(() => {
-                    let bubble = new Bubble(this.x + 200, this.y + 130, this.otherDirection);
-                    this.world.bubble.push(bubble);
-                }, 500);
+                this.bubbleDirection(200);
             } else {
-                setTimeout(() => {
-                    let bubble = new Bubble(this.x + 0, this.y + 130, this.otherDirection);
-                    this.world.bubble.push(bubble);
-                }, 500);
+                this.bubbleDirection(0);
             }
         }
+    }
+
+    bubbleDirection(x){
+        setTimeout(() => {
+            let bubble = new Bubble(this.x + x, this.y + 130, this.otherDirection);
+            this.world.bubble.push(bubble);
+        }, 500);
     }
 
     // sets values ​​so that a bubble only appears every half second
